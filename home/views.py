@@ -1,3 +1,4 @@
+from django.http import request
 from django.shortcuts import render, redirect
 from home.models import profiles, products
 from django.contrib.auth.models import User, auth
@@ -85,3 +86,24 @@ def upload(request):
             print("invalid input")
     form = productsform()
     return render(request, "upload.html", {"form": form})
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            messages.info(request, 'Wrong Values Entered!')
+            return redirect('login')
+
+    else:
+        return render(request, 'login.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
