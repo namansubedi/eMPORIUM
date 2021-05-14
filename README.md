@@ -7,4 +7,9 @@ The app names are:
 2. cart
 3. orderapp
 
+
+
+superuser
+username=eMPORIUM
+password=1234
 Thanks!
