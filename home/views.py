@@ -1,14 +1,23 @@
 from django.shortcuts import render, redirect
-from home.models import profiles
+from home.models import profiles, products
 from django.contrib.auth.models import User, auth
-from .forms import productsform
+from .forms import productsform, profilesform
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    senditem = products.objects.all()
+    return render(request, 'index.html', {"products": senditem})
 
 def register(request):
     if request.method == 'POST':
+
+        form = profilesform(request.POST)
+        if form.is_valid():
+            is_seller = form.cleaned_data['is_seller']
+        else:
+            messages.info(request,'Invalid Data Sent!')
+        
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
         username = request.POST['username']
@@ -21,28 +30,28 @@ def register(request):
         city = request.POST['city']
         area = request.POST['area']
         locale = request.POST['locale']
-        is_seller = request.POST['is_seller']
         gmap = request.POST['gmap']
 
         if password1 != password2:
-            
+            messages.info(request,'Password Mismatch!')
             return redirect('register')
         elif User.objects.filter(username=username).exists():
-            
+            messages.info(request,'Username Already In Use!')
             return redirect('register')
         elif User.objects.filter(email=email).exists():
-            
+            messages.info(request,'Email Already In Use!')
             return redirect('register')
         else:
             user = User.objects.create_user(username=username, first_name=firstname, last_name=lastname, email=email, password=password1)
             user.save()
 
-            profile = profiles.objects.create(user_name=username, phone_number=phone_number, region=region, city=city, area=area, locale=locale, is_seller=False, gmap=gmap)
+            profile = profiles.objects.create(user_name=username, phone_number=phone_number, region=region, city=city, area=area, locale=locale, is_seller=is_seller, gmap=gmap)
             profile.save()
 
             return redirect('/')
     else:
-        return render(request, 'register.html')
+        form = profilesform()
+        return render(request, 'register.html', {"form": form})
 
 def upload(request):
     
