@@ -10,8 +10,10 @@ def index(request):
     user = request.user
     if user.is_authenticated:
         profile = profiles.objects.filter(user_name=user.username)
+        for pro in profile:
+            showupload = pro.is_seller
         senditem = products.objects.all()
-        return render(request, 'index.html', {"products": senditem, "profile": profile})
+        return render(request, 'index.html', {"products": senditem, "showupload": showupload})
     else:
         senditem = products.objects.all()
         return render(request, 'index.html', {"products": senditem} )
