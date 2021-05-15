@@ -57,35 +57,35 @@ def register(request):
 def upload(request):
     
     form = productsform()
+    user = request.user
+    owneruser = user.username
 
     if request.method == 'POST':
         form = productsform(request.POST, request.FILES)
   
         if form.is_valid():
             #form.seller_id=user.username
-            form.save()
-            '''
+            
             name = form.cleaned_data['name']
             cat = form.cleaned_data['category']
-            slug = form.cleaned_data['slug']
             brand = form.cleaned_data['brand']
             price = form.cleaned_data['price']
-            seller_id = form.cleaned_data['seller_id']
+            seller_id = owneruser
             image = form.cleaned_data['image']
             desc = form.cleaned_data['description']
             stock = form.cleaned_data['stock']
-            keywords = form.cleaned_data['keywords']
+            keywords = "this is only a temporary fix for search functionality"
             detail = form.cleaned_data['detail']
             
-            product = products.objects.create()
+            product = products.objects.create(name= name, category=cat, brand=brand, price=price, seller_id=seller_id, image=image, description=desc, stock=stock, keywords=keywords, detail=detail)
             product.save()
-            '''
 
             return redirect('/')
         else:
             print("invalid input")
-    form = productsform()
-    return render(request, "upload.html", {"form": form})
+    else:
+        form = productsform()
+        return render(request, "upload.html", {"form": form})
 
 def login(request):
     if request.method == 'POST':
