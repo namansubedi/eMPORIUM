@@ -7,8 +7,14 @@ from django.contrib import messages
 
 # Create your views here.
 def index(request):
-    senditem = products.objects.all()
-    return render(request, 'index.html', {"products": senditem})
+    user = request.user
+    if user.is_authenticated:
+        profile = profiles.objects.filter(user_name=user.username)
+        senditem = products.objects.all()
+        return render(request, 'index.html', {"products": senditem, "profile": profile})
+    else:
+        senditem = products.objects.all()
+        return render(request, 'index.html', {"products": senditem} )
 
 def register(request):
     if request.method == 'POST':
