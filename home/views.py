@@ -5,6 +5,13 @@ from django.contrib.auth.models import User, auth
 from .forms import productsform, profilesform
 from django.contrib import messages
 
+def search(request):
+    q = request.GET['q']
+    productset = products.objects.filter(name__icontains=q) | products.objects.filter(description__icontains=q) | products.objects.filter(brand__icontains=q)
+    if not productset.exists():
+        q += "--No Such Product Found"
+    return render(request, 'search.html', {"products": productset, "q": q})
+
 # Create your views here.
 def index(request):
     user = request.user
