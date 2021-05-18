@@ -11,6 +11,12 @@ class profiles(models.Model):
     locale = models.CharField(max_length=50)
     is_seller = models.BooleanField(default=False)
     gmap = models.CharField(max_length=100, blank=True, null=True)
+    
+    
+    
+    def __str__(self):
+        return str(self.user_name)
+
 
 category_CHOICES = (
     ("el01", "General Electronics"),
@@ -37,6 +43,12 @@ class products(models.Model):
     stock = models.PositiveIntegerField()
     keywords = models.TextField()
     detail = models.TextField(blank=True, null=True)
+    
+    
+    
+    def __str__(self):
+        return str(self.name)
+
 
     def slugify_function(self, content):
         return content.replace('_', '-').lower()
@@ -45,3 +57,7 @@ class Feedback(models.Model):
     user_id = models.CharField(max_length=50)
     email = models.CharField(max_length=100)
     text = models.TextField()
+    
+    
+    def __str__(self):
+        return str(self.user_id)
