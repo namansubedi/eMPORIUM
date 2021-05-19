@@ -43,7 +43,7 @@ def showcart(request):
             
         return render(request,'showcart.html',{"carts":cart,"totalamount":totalamount,"amount":amount,"noofitem":noofitem})
     else:
-        return redirect('/')
+        return redirect("/")
 
 
     
@@ -52,5 +52,14 @@ def showcart(request):
 
 
 def productdetail(request,slug):
+    noofitem =0
+    user=request.user
+    buyer_id=user.username
     product=products.objects.filter(slug=slug)
-    return render(request, "productdetail.html",{'products':product})
+    item_already_in_cart=False
+    if request.user.is_authenticated:
+        item_already_in_cart=Cart.objects.filter(Q(buyer_id=buyer_id) & Q(product=product[0])).exists()
+        noofitem=len(Cart.objects.filter(buyer_id=buyer_id))
+    return render(request,'productdetail.html',{'products':product,'item_already_in_cart':item_already_in_cart,'noofitem':noofitem})
+    
+    
