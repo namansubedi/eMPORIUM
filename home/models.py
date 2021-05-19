@@ -51,7 +51,7 @@ class products(models.Model):
 
 
     def slugify_function(self, content):
-        return content.replace('_', '-').lower()
+        return content.replace(' ', '-').lower()
 
 class Feedback(models.Model):
     user_id = models.CharField(max_length=50)
