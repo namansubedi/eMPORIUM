@@ -1,27 +1,11 @@
-**/*.pyc
-**/__pycache__
-
 # Byte-compiled / optimized / DLL files
-__pycache__/
+home/__pycache__/
+cart/__pycache__/
+orderapp/__pycache__/
 *.py[cod]
-*$py.class
 
 
-# Django stuff:
-*.log
-local_settings.py
 
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-
+*.pyc
+*.pyo
 media/
