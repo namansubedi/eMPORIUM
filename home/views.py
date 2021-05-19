@@ -79,6 +79,7 @@ def register(request):
 
 def upload(request):
     
+    showupload = False
     form = productsform()
     user = request.user
     owneruser = user.username
@@ -107,8 +108,14 @@ def upload(request):
         else:
             print("invalid input")
     else:
-        form = productsform()
-        return render(request, "upload.html", {"form": form})
+        profile = profiles.objects.filter(user_name=user.username)
+        for pro in profile:
+            showupload = pro.is_seller
+        if showupload:
+            form = productsform()
+            return render(request, "upload.html", {"form": form})
+        else:
+            return render(request, "noupload.html")
 
 def login(request):
     if request.method == 'POST':
