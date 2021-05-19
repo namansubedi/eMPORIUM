@@ -2,6 +2,11 @@
 home/__pycache__/
 cart/__pycache__/
 orderapp/__pycache__/
+empo/__pycache__/
+cart/migrations/__pycache__/
+home/migrations/__pycache__/
+orderapp/migrations/__pycache__/
+
 *.py[cod]
 
 
