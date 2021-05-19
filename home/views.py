@@ -5,10 +5,34 @@ from django.contrib.auth.models import User, auth
 from .forms import productsform, profilesform
 from django.contrib import messages
 
+def editprofile(request):
+
+    user = request.user
+    profile = profiles.objects.get(user_name=user.username)
+
+    if request.method == 'POST':
+        
+        user.first_name = request.POST['firstname']
+        user.last_name = request.POST['lastname']
+
+        user.save()
+
+        profile.phone_number = request.POST['phone_number']
+        profile.region = request.POST['region']
+        profile.city = request.POST['city']
+        profile.area = request.POST['area']
+        profile.locale = request.POST['locale']
+        profile.gmap = request.POST['gmap']
+
+        profile.save()
+
+        return redirect('/')
+    else:
+        return render(request, 'editprofile.html', {'pro': profile })
+
 def profile(request):
     user = request.user
     profile = profiles.objects.filter(user_name=user.username)
-    print(profile)
     return render(request, 'profile.html', {'profile': profile })
 
 def search(request):

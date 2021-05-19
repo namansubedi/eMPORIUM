@@ -27,12 +27,14 @@
                       <h4>{{user.first_name}} {{user.last_name}}</h4>
                       <p class="text-secondary mb-1">@{{user.username}}</p>
                       {% for pro in profile %}
-                      <p class="text-muted font-size-sm">{{pro.locale}}, {{pro.city}}, {{pro.region}}</p>
+                      <p class="text-muted font-size-sm">{{pro.area}}, {{pro.city}}, {{pro.region}}</p>
                       {% endfor %}
                       <form action="upload">
                       <button  class="btn btn-primary">Upload Products</button>
                       </form>
-                      <button class="btn btn-outline-primary">Message</button>
+                      <form action="editprofile">
+                      <button class="btn btn-outline-primary my-3">Update Info</button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -79,13 +81,23 @@
                       {{user.username}}
                     </div>
                   </div>
+
+                  {% for pro in profile%}
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Shipping Area</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{pro.locale}}
+                    </div>
+                  </div>
                   
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Address</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    {% for pro in profile%}
+                    
                       {{pro.area}}, {{pro.city}}, {{pro.region}}
                     {% endfor %}
                     </div>

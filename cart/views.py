@@ -43,7 +43,7 @@ def showcart(request):
             
         return render(request,'showcart.html',{"carts":cart,"totalamount":totalamount,"amount":amount,"noofitem":noofitem})
     else:
-        return render(request,"cart.html")
+        return redirect('/')
 
     
     
