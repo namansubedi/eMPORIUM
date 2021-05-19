@@ -5,10 +5,33 @@ from django.contrib.auth.models import User, auth
 from .forms import productsform, profilesform
 from django.contrib import messages
 
+def profile(request):
+    user = request.user
+    profile = profiles.objects.filter(user_name=user.username)
+    print(profile)
+    return render(request, 'profile.html', {'profile': profile })
+
+def search(request):
+    q = request.GET['q']
+    productset = products.objects.filter(name__icontains=q) | products.objects.filter(description__icontains=q) | products.objects.filter(brand__icontains=q)
+    if not productset.exists():
+        q += "--No Such Product Found"
+    return render(request, 'search.html', {"products": productset, "q": q})
+
 # Create your views here.
 def index(request):
-    senditem = products.objects.all()
-    return render(request, 'index.html', {"products": senditem})
+    user = request.user
+    showupload = False
+    if user.is_authenticated:
+        profile = profiles.objects.filter(user_name=user.username)
+        print(profile)
+        for pro in profile:
+            showupload = pro.is_seller 
+        senditem = products.objects.all()
+        return render(request, 'index.html', {"products": senditem,"showupload":showupload})
+    else:
+        senditem = products.objects.all()
+        return render(request, 'index.html', {"products": senditem} )
 
 def register(request):
     if request.method == 'POST':

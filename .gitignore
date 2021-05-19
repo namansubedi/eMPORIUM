@@ -1,25 +1,19 @@
+<<<<<<< HEAD
 **/*.pyc
 **/__pycache__
 */__pycache__
 
+=======
+>>>>>>> 8cc0eeb49538cf50d22ca2902fd946ae166c4b76
 # Byte-compiled / optimized / DLL files
-__pycache__/
+*/__pycache__
+*/*/__pycache__
+
+
 *.py[cod]
-*$py.class
 
 
-# Django stuff:
-*.log
-local_settings.py
 
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
+*.pyc
+*.pyo
+media/

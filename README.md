@@ -9,7 +9,4 @@ The app names are:
 
 
 
-superuser
-username=eMPORIUM
-password=1234
-Thanks!
+
