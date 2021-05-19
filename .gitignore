@@ -1,11 +1,14 @@
+<<<<<<< HEAD
+**/*.pyc
+**/__pycache__
+*/__pycache__
+
+=======
+>>>>>>> 8cc0eeb49538cf50d22ca2902fd946ae166c4b76
 # Byte-compiled / optimized / DLL files
-home/__pycache__/
-cart/__pycache__/
-orderapp/__pycache__/
-empo/__pycache__/
-cart/migrations/__pycache__/
-home/migrations/__pycache__/
-orderapp/migrations/__pycache__/
+*/__pycache__
+*/*/__pycache__
+
 
 *.py[cod]
 
