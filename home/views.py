@@ -5,6 +5,11 @@ from django.contrib.auth.models import User, auth
 from .forms import productsform, profilesform
 from django.contrib import messages
 
+def myproducts(request):
+    user = request.user
+    product = products.objects.filter(seller_id=user.username)
+    return render(request, 'myproducts.html', {'products': product})
+
 def editprofile(request):
 
     user = request.user
