@@ -9,7 +9,7 @@ from .models import *
 
 # Create your views here.
 def addtocart(request):
-    user = request.user
+    user = request.user # this means the logged-in user
     buyer_id=user.username
     product_id=request.GET.get('prod_id')
     product=products.objects.get(id=product_id)
