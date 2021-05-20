@@ -36,18 +36,17 @@
           </ul>
         </li>
         {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'profile' %}">{{user.first_name}}'s Profile</a>
-        </li>
-        <!-- this is only a temporary button because product page is not built yet -->
-        {% if showupload == True %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'upload' %}">Upload Product</a>
-        </li>
-        {% endif %}
-        <!-- this -->
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Profile Options
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'profile' %}">{{user.first_name}}'s Profile</a></li>
+            {% if showupload == True %}
+            <li><a class="dropdown-item" href="{% url 'upload' %}">Upload Product</a></li>
+            {% endif %}
+            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+          </ul>
         </li>
         {% else %}
         <li class="nav-item">
