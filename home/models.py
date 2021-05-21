@@ -40,7 +40,7 @@ class products(models.Model):
     seller_id = models.CharField(max_length=50)
     image = models.ImageField(upload_to='product_pics')
     description = models.TextField()
-    stock = models.PositiveIntegerField()
+    stock = models.IntegerField(default=0)
     keywords = models.TextField()
     detail = models.TextField(blank=True, null=True)
     

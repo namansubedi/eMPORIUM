@@ -55,10 +55,14 @@ def productdetail(request,slug):
     user=request.user
     buyer_id=user.username
     product=products.objects.filter(slug=slug)
+    seller=product[0].seller_id
+    stock_quantity=product[0].stock
+   # print(stock_quantity)
     is_item_in_cart=False
     if request.user.is_authenticated:
         is_item_in_cart=Cart.objects.filter(Q(buyer_id=buyer_id) & Q(product__in=product)).exists()
-        noofitem=len(Cart.objects.filter(buyer_id=buyer_id))
-    return render(request,'productdetail.html',{'products':product,'is_item_in_cart':is_item_in_cart,'noofitem':noofitem})
+        noofitem=(Cart.objects.filter(buyer_id=buyer_id)).count()
+    return render(request,'productdetail.html',
+                  {'products':product,'is_item_in_cart':is_item_in_cart,'noofitem':noofitem,'seller':seller,'stock_quantity':stock_quantity})
     
     

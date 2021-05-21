@@ -5,10 +5,20 @@
 {% block body %}
 <div class="container my-5">
     <div class="row">
-        <h3 class="text-center">Your cart is empty</h3>
+        <h3 class="text-center">Your cart is empty</h3> 
+        <br>
+
         <div class="text-center">
-            <img src="{% static '2.jpg' %}" alt="" class="rounded mx-auto d-block w-25">
-        </div>
+        
+        
+    <a href="{% url 'index'%}" class="btn btn-info"> Continue Shopping </a>
+
+    </div>
+    <br>
+      <br>
+        <br>
+                    <img src="{% static '2.jpg' %}" alt="" class="rounded mx-auto d-block w-25">
+                    
     </div>
 </div>
 {% endblock body %}
