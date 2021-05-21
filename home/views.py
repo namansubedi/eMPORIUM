@@ -4,6 +4,8 @@ from home.models import profiles, products
 from django.contrib.auth.models import User, auth
 from .forms import productsform, profilesform
 from django.contrib import messages
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 
 def modify(request, slug):
     if request.method == 'POST':
@@ -78,10 +80,19 @@ def index(request):
         for pro in profile:
             showupload = pro.is_seller 
         senditem = products.objects.all()
-        return render(request, 'index.html', {"products": senditem,"showupload":showupload})
+        paginator = Paginator(senditem,3)
+        page = request.GET.get('page')
+        paged_products = paginator.get_page(page)
+        product_count = senditem.count()
+        return render(request, 'index.html', {"products":paged_products,"showupload":showupload,'product_count': product_count,})
     else:
         senditem = products.objects.all()
-        return render(request, 'index.html', {"products": senditem} )
+        paginator = Paginator(senditem,3)
+        page = request.GET.get('page')
+        paged_products = paginator.get_page(page)
+        product_count = senditem.count()
+        return render(request, 'index.html', {"products": senditem,'product_count': product_count})
+
 
 def register(request):
     if request.method == 'POST':

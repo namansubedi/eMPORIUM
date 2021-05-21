@@ -14,8 +14,9 @@ def order(request):
 
 
 def checkout(request):
-    
-    context = {
-        
+     username = request.user.username   
+     cart = Cart.objects.filter(buyer_id = username)
+     context = {
+        'carts':cart
     }
-    return render (request, 'checkout.html',context)
+     return render (request,'checkout.html',context)
