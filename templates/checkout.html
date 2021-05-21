@@ -1,0 +1,90 @@
+<<<<<<< HEAD
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Myorder{% endblock title %}
+{% block body %}
+
+<h1>Order Summary</h1>
+
+<hr>
+<div class="row">
+    <div class="col-lg-8">
+      <div class="box-element "id = "order">
+
+        
+        <!-- loop here-->
+        <div class="cart-row">
+          
+         
+          <div style="flex:2"><img src="static/2.jpg" class="img-fluid img-thumbnail shadow-sm" height="100" width="150"></div>
+          <div style="flex:4">
+              <h6><strong> name</strong></h6>
+              <h6> sth about product</h6>
+              <h6>price : 2000</h6>
+
+        
+          </div>
+          <div style="flex:1">
+              <br>
+              <br>
+              <h6>quantity</h6>
+          </div>
+  
+         
+        </div>
+      </div>
+    </div>
+
+    <div class = "col-lg-3">
+        <div class="box-element" id = "order">
+           
+            <a  class="btn btn-dark" href="{% url 'showcart' %}">&#x2190; Back to Cart</a>
+            <hr>
+            <h6>product total: 1234</h6>
+            <h6>>service charge: 100</h6>
+            <h6>shipping fee: 50</h6>
+            <br>
+            
+            <hr>
+            <h6><strong>Total: </strong><strong text-align = "right">123456</h6>
+
+        </div>
+        <div class="box-element" id = "order">
+            <button type="button" class="btn btn-dark">Confirm</button>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="box-element " id = "order">
+        <div class="cart-row">
+            <div style="flex:2">
+                <h5>Shipping To:</h5>
+                <h6>user</h6>
+                <h6>Contact No</h6>
+                <h6>Address</h6>
+                <h6>Location</h6>
+            </div>
+            <div style="flex:2">
+                <h5>Payment Options:</h5>
+                <h6>e-SEWA</h6>
+                <h6>Khalti</h6>
+                <h6>Paypal</h6>
+                
+            </div>
+           
+        </div>
+        
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+{% endblock body %}
+
