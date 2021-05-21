@@ -1,5 +1,5 @@
 from django.db import models
-
+from home.models import products
 # Create your models here.
 
 status_CHOICES = (
@@ -18,7 +18,7 @@ class order(models.Model):
 
 class order_item(models.Model):
     order_id = models.BigIntegerField() 
-    product_id = models.IntegerField() #pk of the product
+    product_id = models.ForeignKey(products, on_delete=models.CASCADE)
     product_quantity = models.IntegerField() #no. of this products in this order
 
 provider_CHOICES = (
