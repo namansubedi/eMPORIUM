@@ -11,4 +11,5 @@ urlpatterns = [
     path('profile', views.profile, name="profile"),
     path('editprofile', views.editprofile, name="editprofile"),
     path('myproducts', views.myproducts, name="myproducts"),
+    path('modify/<str:slug>', views.modify, name="modify")
 ]

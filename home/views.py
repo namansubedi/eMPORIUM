@@ -5,6 +5,27 @@ from django.contrib.auth.models import User, auth
 from .forms import productsform, profilesform
 from django.contrib import messages
 
+def modify(request, slug):
+    if request.method == 'POST':
+        slug = request.POST['slug']
+        product=products.objects.get(slug=slug)
+        product.name = request.POST['name']
+        product.brand = request.POST['brand']
+        product.price = request.POST['price']
+        product.description = request.POST['description']
+        product.stock = request.POST['stock']
+        product.detail = request.POST['detail']
+
+        product.save()
+
+        return redirect('/')
+    user=request.user
+    product=products.objects.get(slug=slug)
+    if user.username == product.seller_id:
+        return render(request, 'modify.html', {'product': product})
+    else:
+        return redirect('/')
+
 def myproducts(request):
     user = request.user
     product = products.objects.filter(seller_id=user.username)
