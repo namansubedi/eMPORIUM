@@ -10,15 +10,15 @@ status_CHOICES = (
 
 class order(models.Model):
     order_id = models.BigIntegerField()
-    order_date = models.DateTimeField()
+    order_date = models.DateTimeField(auto_now_add=True)
     buyer_id = models.CharField(max_length=20)
     status = models.CharField(choices=status_CHOICES, max_length=10)
     amount = models.FloatField()
-    received_date = models.DateTimeField()
+    received_date = models.DateTimeField(auto_now_add=True)
 
 class order_item(models.Model):
     order_id = models.BigIntegerField() 
-    product_id = models.ForeignKey(products, on_delete=models.CASCADE)
+    product = models.ForeignKey(products, on_delete=models.CASCADE)
     product_quantity = models.IntegerField() #no. of this products in this order
 
 provider_CHOICES = (
@@ -38,4 +38,4 @@ class payment_details(models.Model):
     provider = models.CharField(choices=provider_CHOICES, max_length=10)
     amount = models.FloatField() #total amount paid by the customer
     status = models.CharField(choices=payment_CHOICES, max_length=10)
-    payment_date = models.DateTimeField()
+    payment_date = models.DateTimeField(auto_now_add=True)

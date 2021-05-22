@@ -1,10 +1,16 @@
-<<<<<<< HEAD
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Myorder{% endblock title %}
 {% block body %}
 
 <h1>Order Summary</h1>
+
+{% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show mt-3 mx-5" role="alert">
+     {{ message }} 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
 
 <hr>
 <div class="row">
@@ -13,25 +19,26 @@
 
         
         <!-- loop here-->
+        {% for cart in carts%}
         <div class="cart-row">
           
          
-          <div style="flex:2"><img src="static/2.jpg" class="img-fluid img-thumbnail shadow-sm" height="100" width="150"></div>
+          <div style="flex:2"><img src="{{cart.product.image.url}}" class="img-fluid img-thumbnail shadow-sm" height="100" width="150"></div>
           <div style="flex:4">
-              <h6><strong> name</strong></h6>
-              <h6> sth about product</h6>
-              <h6>price : 2000</h6>
+              <h6><strong> {{cart.product.name}}</strong></h6>
+              <h6>{{cart.product.description}}</h6>
+              <h6>price : {{cart.product.price}}</h6>
 
         
           </div>
           <div style="flex:1">
               <br>
               <br>
-              <h6>quantity</h6>
+              <h6>{{cart.quantity}}</h6>
           </div>
-  
          
         </div>
+        {% endfor %}
       </div>
     </div>
 
@@ -40,17 +47,26 @@
            
             <a  class="btn btn-dark" href="{% url 'showcart' %}">&#x2190; Back to Cart</a>
             <hr>
-            <h6>product total: 1234</h6>
-            <h6>>service charge: 100</h6>
-            <h6>shipping fee: 50</h6>
+            <h6>Product total: {{totalamount}}</h6>
+            <h6>Service charge: 20</h6>
+            <h6>Shipping fee: 50</h6>
             <br>
             
             <hr>
-            <h6><strong>Total: </strong><strong text-align = "right">123456</h6>
+            <h6><strong>Total: </strong><strong text-align = "right">{{grandtotal}}</h6>
 
         </div>
         <div class="box-element" id = "order">
-            <button type="button" class="btn btn-dark">Confirm</button>
+        <form action="{% url 'checkout' %}" method="post">
+        {% csrf_token %}
+            <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" checked="" name="cod" id="cod">
+                  <label class="form-check-label" for="cod">
+                    Cash On Delivery
+                  </label>
+                </div>
+          <button type="submit" class="btn btn-dark" >Confirm</button>
+        </form>
         </div>
     </div>
   </div>
@@ -61,15 +77,17 @@
         <div class="cart-row">
             <div style="flex:2">
                 <h5>Shipping To:</h5>
-                <h6>user</h6>
-                <h6>Contact No</h6>
-                <h6>Address</h6>
-                <h6>Location</h6>
+                <h6>{{user.first_name}} {{user.last_name}}</h6>
+                <h6>Contact No: {{profile.phone_number}}</h6>
+                <h6>Address: {{profile.locale}}, {{profile.area}}</h6>
+                <h6>Location: {{profile.city}}, {{profile.region}}</h6>
             </div>
             <div style="flex:2">
                 <h5>Payment Options:</h5>
-                <h6>e-SEWA</h6>
-                <h6>Khalti</h6>
+                <h6>
+                  esewa(Not working LOL)
+                </h6>
+                
                 <h6>Paypal</h6>
                 
             </div>
