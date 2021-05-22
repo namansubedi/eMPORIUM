@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Order Details{% endblock title %}
+{% block body %}
+
+<h1>Order Details</h1>
+<hr>
+<h3>Order No.: {{orders.order_id}}</h3>
+<h3>Order Status: {{orders.status}}</h3>
+<hr>
+{% for prod in orderitem %}
+
+    <img src="{{prod.product.image.url}}" class="img-fluid img-thumbnail shadow-sm" height="100" width="150">
+    <h4>Product Name: {{prod.product.name}}</h4>
+    <h4>Quantity: {{prod.product_quantity}}</h4>
+    <h4>Ordered on: {{orders.order_date}}</h4>
+    <h4>Order Status: {{orders.status}}</h4>
+    <hr>
+{% endfor %}
+
+<h3>Payment Details</h3>
+    <h4>Payment Method: {{payment.provider}}</h4>
+    <h4>Payment Status: {{payment.status}}</h4>
+    <h4>Payment Amount: {{payment.amount}}</h4>
+    {% if payment.status == 'y' %}
+    <h4>Payment Date: {{payment.payment_date}}</h4>
+    {% endif %}
+<hr>
+<a href="{% url 'index' %}">Go to Home</a>
+{% endblock body %}

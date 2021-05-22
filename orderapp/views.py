@@ -7,6 +7,17 @@ import random
 
 # Create your views here.
 
+def orderdetails(request, orderid):
+    order1 = order.objects.get(order_id = orderid)
+    orderitem = order_item.objects.filter(order_id =  orderid)
+    payment = payment_details.objects.get(order_id = orderid)
+    context = {
+        'orders': order1,
+        'orderitem': orderitem,
+        'payment': payment,
+    }
+    return render(request, 'orderdetails.html', context)
+
 def esewa(request):
     pass
 
@@ -80,7 +91,7 @@ def checkout(request):
                 an_order = order_item(product = product, product_quantity = product_quantity, order_id = order_id)
                 an_order.save()
             
-            payment = payment_details(order_id = temp_order_id, provider = "cod", amount = grand_total, status = "y")
+            payment = payment_details(order_id = temp_order_id, provider = "cod", amount = grand_total, status = "n")
             payment.save()
 
             main_order = order(order_id = temp_order_id, buyer_id = username, status = "pro", amount = grand_total)
