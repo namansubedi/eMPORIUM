@@ -6,30 +6,32 @@
 <h1>My Orders</h1>
 <hr>
 
+{% for order in orders %}
 
 <div class="row">
   <div class="col-lg-12">
     <div class="box-element "id = "order">
-      <h6> Order No: 1234567890</h6>
-      <h6> Order Status: Delivering</h6>
-      {% for cart in carts%}
-      <hr>
+      <h6> Order No: {{order.order_id}}</h6>
+      <h6> Order Status: {{order.status}}</h6>
+      {% for oi in order_item1 %}
       <div class="cart-row">
         
-       
-        <div style="flex:2"><img src="{{cart.product.image.url}}" class="img-fluid img-thumbnail shadow-sm" height="100" width="150"></div>
-        <div style="flex:2">{{cart.product.name}}</div>
-        <div style="flex:1">Quantity:{{cart.quantity}}</div>
+       {% if oi.order_id == order.order_id %}
+        <div style="flex:2"><img src="{{oi.product.image.url}}" class="img-fluid img-thumbnail shadow-sm" height="100" width="150"></div>
+        <div style="flex:2">{{oi.product.name}}</div>
+        <div style="flex:1">Quantity: {{oi.product_quantity}}</div>
 
-        <div style="flex:1" ><button type="button" class="btn btn-warning edit">processing</button></div>
-        <div style="flex:1">Ordered on:555525</div>
+        <div style="flex:1" ><button type="button" class="btn btn-warning edit">{{order.status}}</button></div>
+        <div style="flex:1">Ordered on: {{order.order_date}}</div>
         <hr>
-        
+        {% endif %}
+      
       </div>
       {% endfor %}
     </div>
   </div>
 </div>
-<br>
+<hr>
+{% endfor %}
 
 {% endblock body %}

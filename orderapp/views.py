@@ -11,10 +11,18 @@ def esewa(request):
     pass
 
 def myorder(request):
-    username = request.user.username    
-    cart = Cart.objects.filter(buyer_id = username)
+    username = request.user.username  
+    order_item1 =  order_item.objects.none()
+    payment = payment_details.objects.none()
+    order1 = order.objects.filter(buyer_id = username)
+    
+    for orderid in order1:
+        payment = payment | payment_details.objects.filter(order_id = orderid.order_id)
+        order_item1 = order_item1 | order_item.objects.filter(order_id = orderid.order_id)
     context = {
-        'carts': cart
+        'orders': order1,
+        'order_item1': order_item1,
+        'payment': payment,
     }
     
     return render(request , 'myorder.html',context)
