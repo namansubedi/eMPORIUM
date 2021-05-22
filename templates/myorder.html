@@ -12,8 +12,12 @@
   <div class="col-lg-12">
     <div class="box-element "id = "order">
       <h6> Order No: {{order.order_id}}</h6>
+      <div class = "float-right">
+        <a class = "btn btn-primary" href ="#">View Deatils</a>
+      </div>
       <h6> Order Status: {{order.status}}</h6>
       {% for oi in order_item1 %}
+      
       <div class="cart-row">
         
        {% if oi.order_id == order.order_id %}
