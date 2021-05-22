@@ -102,7 +102,7 @@ def checkout(request):
             
             messages.info(request,'Order Has Been Placed! Please go to My Orders for further details!')
 
-            return redirect('checkout')     
+            return render(request, 'sucess.html')
 
     context = {
         'carts':cart,
