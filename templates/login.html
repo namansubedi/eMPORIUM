@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block title %}
@@ -6,26 +7,44 @@ Login
 
 {% block body %}
 
+<section class="section-conten padding-y" style="min-height:84vh">
+<div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+
+
+      <div class="card-body">
+      <h4 class="card-title mb-4">Sign in</h4>
+
+
 <form action="login" method="post">
     {% csrf_token %}
-    <div class="mt-3 mx-5">
+    	 <div class="form-group">
         <label for="exampleInputPassword1" class="form-label">Username</label>
         <input type="text" class="form-control" name="username">
     </div>
-    <div class="mt-3 mx-5">
+    	 <div class="form-group">
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input type="password" class="form-control" name="password">
     </div>
-    <div class="mt-3 mx-5">
+    	 <div class="form-group">
+         <br><br>
     <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
+</div>
+
 
 {% for message in messages %}
     <div class="alert alert-warning alert-dismissible fade show mt-3 mx-5" role="alert">
     <strong>Holy guacamole!</strong> {{ message }} !!
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
 {% endfor %}
+
+     <p class="text-center mt-4">Don't have account? <a href="{% url 'register' %}">Sign up</a></p>
+     <br><br>
+
+</div>
+</section>
 
 {% endblock body %}

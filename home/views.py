@@ -80,14 +80,14 @@ def index(request):
         for pro in profile:
             showupload = pro.is_seller 
         senditem = products.objects.all()
-        paginator = Paginator(senditem,3)
+        paginator = Paginator(senditem,20)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = senditem.count()
         return render(request, 'index.html', {"products":paged_products,"showupload":showupload,'product_count': product_count,})
     else:
         senditem = products.objects.all()
-        paginator = Paginator(senditem,3)
+        paginator = Paginator(senditem,20)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = senditem.count()
