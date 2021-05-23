@@ -1,5 +1,6 @@
 body{
     color: #1a202c;
+    back
     text-align: left;
     background-color: #e2e8f0;    
 }
@@ -8,6 +9,7 @@ body{
 }
 .card {
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    
 }
 
 .card {
@@ -21,7 +23,12 @@ body{
     border: 0 solid rgba(0,0,0,.125);
     border-radius: .25rem;
 }
-
+.profile{
+    
+    background-color: transparent;
+    opacity: 1;
+    border-color: red;
+}
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
@@ -81,4 +88,10 @@ body{
 	margin: 10px;
 	background-color: yellow;
 	padding: 10px;
+}
+
+.profile_back{
+    background-color:powderblue;
+    background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');background-size: cover;
+    background-repeat: no-repeat;
 }
