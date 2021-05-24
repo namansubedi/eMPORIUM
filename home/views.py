@@ -159,7 +159,7 @@ def upload(request):
             image = form.cleaned_data['image']
             desc = form.cleaned_data['description']
             stock = form.cleaned_data['stock']
-            keywords = "this is only a temporary fix for search functionality"
+            keywords = " "
             detail = form.cleaned_data['detail']
             
             product = products.objects.create(name= name, category=cat, brand=brand, price=price, seller_id=seller_id, image=image, description=desc, stock=stock, keywords=keywords, detail=detail)
