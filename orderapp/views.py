@@ -4,8 +4,63 @@ from orderapp.models import order, payment_details, order_item
 from home.models import profiles
 from django.contrib import messages
 import random
+from .forms import fulfillform, paymentform
 
-# Create your views here.
+def fulfillmentdetails(request, id):
+    if request.method == 'POST':
+        id = request.POST['id']
+        form1 = fulfillform(request.POST)
+        if form1.is_valid():
+            status1 = form1.cleaned_data['status']
+            item1 = order_item.objects.filter(order_id=id)
+            for i in item1:
+                i.status=status1
+                i.save()
+        else:
+            print(1)
+        return redirect('fulfillment')
+    else:
+        send_items = order_item.objects.filter(order_id = id)
+        context = {
+            'order_items': send_items,
+            'form1': fulfillform,
+            'id': id,
+        }
+        return render(request, 'fulfillmentdetails.html', context)
+
+def fulfillment(request):
+
+    user = request.user
+    username = user.username
+    id_list = []
+    no_sold = 0
+    send_orders = order_item.objects.none()
+    all_orders = order_item.objects.all()
+    order1 = order.objects.all()
+    order2 = order.objects.none()
+    for item in all_orders:
+        no_sold += 1
+        if item.product.seller_id == username:
+            #send_orders = send_orders | item
+            id = item.order_id
+            id_list.append(id)
+    print(send_orders)
+    print(id_list)
+    id_finallist = [i for j, i in enumerate(id_list) if i not in id_list[:j]] 
+
+    for o in order1:
+        for ide in id_finallist:
+            if o.order_id == ide:
+                #order2 = order2 | o
+                print(order2)
+
+    send_orders = order_item.objects.filter(product__seller_id=username)
+    context = {
+        'order_items': send_orders,
+        'id_list': id_finallist,
+        'no_sold': no_sold,
+    }
+    return render(request, 'fulfillment.html', context)
 
 def orderdetails(request, orderid):
     order1 = order.objects.get(order_id = orderid)
@@ -49,15 +104,18 @@ def confirmation(request):
 
 def checkout(request):
 
-    username = request.user.username  
+    user = request.user
+    username = user.username  
     profile = profiles.objects.get(user_name= username) 
     cart = Cart.objects.filter(buyer_id = username)
     product_in_cart=[product for product in Cart.objects.all() if product.buyer_id==username]
     totalamount=0
     amount=0
     charge=0
+    no_of_items=0
 
     if product_in_cart:
+        no_of_items += 1
         for product in product_in_cart:
             temp=(product.quantity*product.product.price)
             amount=temp+amount
@@ -82,17 +140,14 @@ def checkout(request):
                 if not order.objects.filter(order_id= temp_order_id).exists():
                     break
 
-
             for prod in cart:
+                payment = payment_details(order_id = temp_order_id, provider = "cod", amount = grand_total, status = "n")
                 product = prod.product
                 product_quantity = prod.quantity
                 order_id = temp_order_id
-
-                an_order = order_item(product = product, product_quantity = product_quantity, order_id = order_id)
+                payment.save()
+                an_order = order_item(product = product, product_quantity = product_quantity, order_id = order_id, payment_detail = payment, profile=profile, buyer=user, cost = product.price, status="pro")
                 an_order.save()
-            
-            payment = payment_details(order_id = temp_order_id, provider = "cod", amount = grand_total, status = "n")
-            payment.save()
 
             main_order = order(order_id = temp_order_id, buyer_id = username, status = "pro", amount = grand_total)
             main_order.save()

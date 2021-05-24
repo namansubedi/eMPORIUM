@@ -6,5 +6,6 @@ urlpatterns = [
     path('checkout/',views.checkout, name = "checkout"),
     path('orderdetails/<int:orderid>', views.orderdetails, name="orderdetails"),
     path('esewa/', views.esewa, name="esewa"),
-    path('confirmation/', views.confirmation, name="confirmation"),
+    path('fulfillment/', views.fulfillment, name="fulfillment"),
+    path('fulfillmentdetails/<int:id>', views.fulfillmentdetails, name="fulfillmentdetails"),
 ]

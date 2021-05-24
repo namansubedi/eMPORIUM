@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Fullfillment{% endblock title %}
+{% block body %}
+
+    {% for id in id_list %}
+        {% for item in order_items %}
+            {% if id == item.order_id %}
+            <h3>{{item.product.name}}</h3>
+            <h3>Product Quantity: {{item.product_quantity}}</h3>
+            <img src="{{item.product.image.url}}" width="200" height="200" >
+            {% endif %}
+        {% endfor %}
+        <br>
+        <h3><a href="{% url 'fulfillmentdetails' id %}" > Edit </a></h3>
+        <hr>
+    {% endfor %}
+
+{% endblock body %}

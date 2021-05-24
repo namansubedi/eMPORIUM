@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Fullfillment Details{% endblock title %}
+{% block body %}
+<h2>Order No.:{{id}}</h2>
+{% for item in order_items%}
+<h3>Product name: {{item.product.name}}</h3>
+<h3>Product Quantity: {{item.product_quantity}}</h3>
+<img src="{{item.product.image.url}}" width="200" height="200" >
+{% endfor %}
+<form action="/orderapp/fulfillmentdetails/1" method="post">
+{% csrf_token %}
+<h3>Delivery Status: {{form1.as_p}}</h3>
+<input type="hidden" name="id" value="{{id}}" >
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock body %}
