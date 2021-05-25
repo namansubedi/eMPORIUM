@@ -15,7 +15,7 @@
    <h2>Product Title:{{product.name}}</h2>
    <hr>
    <p>Product Description:{{product.description}}</p> 
-   <h4>{{product.price}}</h4>
+   <h4>Price: Rs. {{product.price}}</h4>
     {% if request.user.is_authenticated %} 
      {% if stock_quantity == 0 %} 
     <a href="{% url 'showcart' %}" class="btn btn-success shadow px-5 py-2 ms-4">Out of Stock</a>
@@ -23,6 +23,7 @@
 
     {% elif user.username == seller%} 
      <a href="{% url 'showcart' %}" class="btn btn-success shadow px-5 py-2 ms-4">Cant BUY</a>
+     <h5>Product stock: {{product.stock}}</h5>
       <a href="{% url 'delete' product.id %}" class="btn btn-dark shadow px-5 py-2 ms-4">Delete</a>
 
    {% elif is_item_in_cart %}

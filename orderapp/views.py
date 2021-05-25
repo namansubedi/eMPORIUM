@@ -145,6 +145,10 @@ def checkout(request):
                 product = prod.product
                 product_quantity = prod.quantity
                 order_id = temp_order_id
+                #print(product.stock)
+                product.stock -= product_quantity
+                #print(product.stock)
+                product.save()
                 payment.save()
                 an_order = order_item(product = product, product_quantity = product_quantity, order_id = order_id, payment_detail = payment, profile=profile, buyer=user, cost = product.price, status="pro")
                 an_order.save()
