@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% load static %}
 
@@ -22,6 +23,7 @@
 
     {% elif user.username == seller%} 
      <a href="{% url 'showcart' %}" class="btn btn-success shadow px-5 py-2 ms-4">Cant BUY</a>
+      <a href="{% url 'delete' product.id %}" class="btn btn-dark shadow px-5 py-2 ms-4">Delete</a>
 
    {% elif is_item_in_cart %}
    
@@ -30,7 +32,9 @@
     <form action="{% url 'addtocart' %}" class="d-inline">
         <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
         <button type="submit" class="btn btn-danger shadow px-5 py-2">Add to Cart</button>
+        
     </form>
+     <a href="#" class="btn btn-dark shadow px-5 py-2 ms-4">Buy Now</a>
 
 {% endif %}
    {% endif %}
@@ -42,7 +46,7 @@
         <button type="submit" class="btn btn-dark shadow px-5 py-2">Add to Cart</button>
     </form>
    {% endif %}
-   <a href="#" class="btn btn-dark shadow px-5 py-2 ms-4">Buy Now</a>
+  
    <h5 class="mt-5">Available Offers</h5>
    <ul>
     <li>Bank Offer 5% Unlimited Cashback on eMPORIUM coupon</li>

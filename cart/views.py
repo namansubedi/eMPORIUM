@@ -5,6 +5,17 @@ from django.db.models import Q
 
 from home.models import products
 from .models import *
+
+
+ 
+def delete(request,id):
+    user = request.user # this means the logged-in user
+    username=user.username
+    product=products.objects.get(id=id)
+    if product.seller_id == username:
+        product.delete()
+    return redirect('myproducts')
+    
  
 
 # Create your views here.
