@@ -19,8 +19,8 @@
 
     <title>{% block title %}{% endblock title %} | eMPORIUM</title>
     <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg  ik">
+  <div class="container-fluid anurag">
     <a class="navbar-brand" href="/">eMPORIUM</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -54,7 +54,6 @@
             {% endif %}
             <li><a class="dropdown-item" href="{% url 'myorder' %}">My orders</a></li>
             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-             <li><a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a></li>
           </ul>
         </li>
         {% else %}

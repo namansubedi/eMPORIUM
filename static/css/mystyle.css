@@ -18,15 +18,12 @@ body{
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
+    background-color: rgb(53, 47, 47);
     background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
+    border: 0 solid rgba(49, 46, 46, 0.125);
     border-radius: .25rem;
 }
-.profile{
-    color: #00887a;
-    
-}
+
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
@@ -89,10 +86,28 @@ body{
 }
 
 .profile_back{
-    color: #00887a;
-    background-color: #77aff7;
 
+
+    
+    background: #DEE7F1;
+
+}
+.profile{
+    
+    color: white;
+    
+    background: linear-gradient(180deg, #000000 37.81%, #718DF0 91.98%);
+    border-radius: 27px;
 }
 .textt{
     color: #8d8d8a;
+}
+.navbar{
+    background-color:black;
+    font-size: large;
+    color-adjust: red;
+}
+.navbar a {
+    color: white;
+    
 }
