@@ -15,7 +15,6 @@
       <div class = "float-right">
         <a class = "btn btn-primary" href ="{% url 'orderdetails' order.order_id %}">View Details</a>
       </div>
-      <h6> Order Status: {{order.status}}</h6>
       {% for oi in order_item1 %}
       
       <div class="cart-row">
@@ -25,7 +24,7 @@
         <div style="flex:2">{{oi.product.name}}</div>
         <div style="flex:1">Quantity: {{oi.product_quantity}}</div>
 
-        <div style="flex:1" ><button type="button" class="btn btn-warning edit">{{order.status}}</button></div>
+        <div style="flex:1" ><button type="button" class="btn btn-warning edit">{{oi.status}}</button></div>
         <div style="flex:1">Ordered on: {{order.order_date}}</div>
         <hr>
         {% endif %}

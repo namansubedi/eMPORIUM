@@ -8,9 +8,16 @@
 <h3>Product Quantity: {{item.product_quantity}}</h3>
 <img src="{{item.product.image.url}}" width="200" height="200" >
 {% endfor %}
+<h5>Shipping Address: {{address.locale}}, {{address.area}}, {{address.city}}, {{address.region}}</h5>
 <form action="/orderapp/fulfillmentdetails/1" method="post">
 {% csrf_token %}
 <h3>Delivery Status: {{form1.as_p}}</h3>
+<h3>Payment Status:</h3>
+<select name="pay" id="pay">
+  <option value="Not Paid">Not Paid</option>
+  <option value="Paid">Paid</option>
+</select>
+<br>
 <input type="hidden" name="id" value="{{id}}" >
 <button type="submit" class="btn btn-primary">Submit</button>
 </form>

@@ -4,16 +4,16 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 status_CHOICES = (
-    ("pro", "Processing"),
-    ("del", "Delivering"),
-
+    ("Processing", "Processing"),
+    ("Delivering", "Delivering"),
+    ("Delivered", "Delivered"),
+    ("Cancelled", "Cancelled"),
 )
 
 class order(models.Model):
     order_id = models.BigIntegerField()
     order_date = models.DateTimeField(auto_now_add=True)
     buyer_id = models.CharField(max_length=20)
-    status = models.CharField(choices=status_CHOICES, max_length=10)
     amount = models.FloatField()
     received_date = models.DateTimeField(auto_now=True)
 
@@ -30,20 +30,21 @@ class order_item(models.Model):
     status = models.CharField(choices=status_CHOICES, max_length=10)
 
 provider_CHOICES = (
-    ("e", "eSewa"),
-    ("cod", "Cash On Delivery"),
+    ("eSewa", "eSewa"),
+    ("Cash On Delivery", "Cash On Delivery"),
 
 )
 
 payment_CHOICES = (
-    ("y", "Paid"),
-    ("n", "Not Paid"),
+    ("Paid", "Paid"),
+    ("Not Paid", "Not Paid"),
 
 )
 
 class payment_details(models.Model):
     order_id = models.BigIntegerField()
-    provider = models.CharField(choices=provider_CHOICES, max_length=10)
+    provider = models.CharField(choices=provider_CHOICES, max_length=20)
     amount = models.FloatField() #total amount paid by the customer
     status = models.CharField(choices=payment_CHOICES, max_length=10)
     payment_date = models.DateTimeField(auto_now=True)
+    seller_id = models.CharField(max_length=50)

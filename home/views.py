@@ -12,7 +12,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 def category(request,cat):
   
     product=products.objects.filter(category=cat)
-    print(product)
+    #print(product)
     return render(request,"category.html",{'products': product,'cat':cat})
 
 
@@ -92,7 +92,7 @@ def profile(request):
 
 def search(request):
     q = request.GET['q']
-    productset = products.objects.filter(name__icontains=q) | products.objects.filter(description__icontains=q) | products.objects.filter(brand__icontains=q)
+    productset = (products.objects.filter(name__icontains=q) | products.objects.filter(description__icontains=q) | products.objects.filter(brand__icontains=q)).order_by('id').reverse()
     if not productset.exists():
         q += "--No Such Product Found"
     return render(request, 'search.html', {"products": productset, "q": q})
@@ -105,17 +105,17 @@ def index(request):
     showupload = False
     if user.is_authenticated:
         profile = profiles.objects.filter(user_name=user.username)
-        print(profile)
+        #print(profile)
         for pro in profile:
             showupload = pro.is_seller 
-        senditem = products.objects.all()
+        senditem = products.objects.all().order_by('id').reverse()
         paginator = Paginator(senditem,20)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = senditem.count()
         return render(request, 'index.html', {"products":paged_products,"showupload":showupload,'product_count': product_count,"category":category})
     else:
-        senditem = products.objects.all()
+        senditem = products.objects.all().order_by('id').reverse()
         paginator = Paginator(senditem,20)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
@@ -195,8 +195,6 @@ def upload(request):
             product.save()
 
             return redirect('/')
-        else:
-            print("invalid input")
     else:
         profile = profiles.objects.filter(user_name=user.username)
         for pro in profile:

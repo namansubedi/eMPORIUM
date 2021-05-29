@@ -7,22 +7,35 @@ import random
 from .forms import fulfillform, paymentform
 
 def fulfillmentdetails(request, id):
+    user = request.user
+    username = user.username
     if request.method == 'POST':
         id = request.POST['id']
         form1 = fulfillform(request.POST)
         if form1.is_valid():
             status1 = form1.cleaned_data['status']
-            item1 = order_item.objects.filter(order_id=id)
-            for i in item1:
+            paystat = request.POST['pay']
+            #print(paystat)
+            item1 = order_item.objects.filter(order_id=id) & order_item.objects.filter(product__seller_id = username)
+            p = payment_details.objects.filter(seller_id=username)
+            for i in item1:                
                 i.status=status1
+                #i.payment_detail__status=paystat
+                #print(i.payment_detail__status)
                 i.save()
+            print(p)
+            for pa in p:
+                pa.status = paystat
+                pa.save()
+            return redirect('fulfillment')
         else:
             print(1)
         return redirect('fulfillment')
     else:
-        send_items = order_item.objects.filter(order_id = id)
+        send_items = order_item.objects.filter(order_id = id) & order_item.objects.filter(product__seller_id = username)
         context = {
             'order_items': send_items,
+            'address': send_items[0].profile,
             'form1': fulfillform,
             'id': id,
         }
@@ -44,8 +57,8 @@ def fulfillment(request):
             #send_orders = send_orders | item
             id = item.order_id
             id_list.append(id)
-    print(send_orders)
-    print(id_list)
+    #print(send_orders)
+    #print(id_list)
     id_finallist = [i for j, i in enumerate(id_list) if i not in id_list[:j]] 
 
     for o in order1:
@@ -65,11 +78,9 @@ def fulfillment(request):
 def orderdetails(request, orderid):
     order1 = order.objects.get(order_id = orderid)
     orderitem = order_item.objects.filter(order_id =  orderid)
-    payment = payment_details.objects.get(order_id = orderid)
     context = {
         'orders': order1,
         'orderitem': orderitem,
-        'payment': payment,
     }
     return render(request, 'orderdetails.html', context)
 
@@ -80,7 +91,7 @@ def myorder(request):
     username = request.user.username  
     order_item1 =  order_item.objects.none()
     payment = payment_details.objects.none()
-    order1 = order.objects.filter(buyer_id = username)
+    order1 = order.objects.filter(buyer_id = username).order_by('id').reverse()
     
     for orderid in order1:
         payment = payment | payment_details.objects.filter(order_id = orderid.order_id)
@@ -141,7 +152,7 @@ def checkout(request):
                     break
 
             for prod in cart:
-                payment = payment_details(order_id = temp_order_id, provider = "cod", amount = grand_total, status = "n")
+                payment = payment_details(order_id = temp_order_id, provider = "Cash On Delivery", amount = grand_total, status = "Not Paid", seller_id=prod.product.seller_id)
                 product = prod.product
                 product_quantity = prod.quantity
                 order_id = temp_order_id
@@ -150,10 +161,10 @@ def checkout(request):
                 #print(product.stock)
                 product.save()
                 payment.save()
-                an_order = order_item(product = product, product_quantity = product_quantity, order_id = order_id, payment_detail = payment, profile=profile, buyer=user, cost = product.price, status="pro")
+                an_order = order_item(product = product, product_quantity = product_quantity, order_id = order_id, payment_detail = payment, profile=profile, buyer=user, cost = product.price, status="Processing")
                 an_order.save()
 
-            main_order = order(order_id = temp_order_id, buyer_id = username, status = "pro", amount = grand_total)
+            main_order = order(order_id = temp_order_id, buyer_id = username, amount = grand_total)
             main_order.save()
 
             for prod in cart:

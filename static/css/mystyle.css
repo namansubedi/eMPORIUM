@@ -26,7 +26,7 @@ body{
 .categorybox {
     position: relative;
     left: 110px;
-    font-size: 25px;
+    font-size: 15px;
 
 }
 
@@ -50,7 +50,7 @@ body{
 }
 
 .bg-gray-300 {
-    background-color: #e2e8f0;
+    background-color: #ffffff;
 }
 .h-100 {
     height: 100%!important;
@@ -92,16 +92,23 @@ body{
 }
 
 .profile_back{
-
-
-    
-    background: #DEE7F1;
+    background: #ffffff;
 
 }
 .profile{
     
     color: white;
     
+    background: linear-gradient(180deg, #000000 37.81%, #718DF0 91.98%);
+    border-radius: 27px;
+}
+.drpdwn{
+    background-color: rgb(0, 0, 0);
+}
+.editprofile{
+    margin: auto;
+    color: white;
+    width: 500px;
     background: linear-gradient(180deg, #000000 37.81%, #718DF0 91.98%);
     border-radius: 27px;
 }

@@ -3,11 +3,12 @@
 {% block title %}Modify{% endblock title %}
 
 {% block body %}
-
-    <h1>Modify Product Details</h1>
+<div class="editprofile">
+    <hr>
     <form action="modify" method="post">
     {% csrf_token %}
     <div class="mt-3 mx-5">
+    <h3>Modify Product Details</h3>
         <label for="exampleInputPassword1" class="form-label">Name/Title</label>
         <input type="text" class="form-control" name="name" value="{{product.name}}">
     </div>
@@ -36,5 +37,6 @@
     <button type="submit" class="btn btn-primary">Submit</button>
     </div>
     </form>
-
+    <hr>
+</div>
 {% endblock body %}
