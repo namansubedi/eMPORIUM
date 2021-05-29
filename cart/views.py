@@ -7,6 +7,18 @@ from home.models import products
 from .models import *
 
 
+
+def buynow(request,slug):
+    user = request.user # this means the logged-in user
+    username=user.username
+    product=products.objects.get(slug=slug)
+    cart = Cart.objects.filter(buyer_id=username)
+    for item in cart:
+        item.delete()
+    buy=Cart(buyer_id=username,product=product)
+    buy.save()
+    return redirect('showcart')
+
  
 def delete(request,id):
     user = request.user # this means the logged-in user
@@ -35,16 +47,15 @@ def showcart(request):
     user = request.user
     buyer_id = user.username
     cart=Cart.objects.filter(buyer_id=buyer_id)
-    product_in_cart=[product for product in Cart.objects.all() if product.buyer_id==buyer_id]
     totalamount=0
     amount=0
     charge=50
     
     #print(cart)
-    #print(product_in_cart)
+
     
-    if product_in_cart:
-        for product in product_in_cart:
+    if cart:
+        for product in cart:
             temp=(product.quantity*product.product.price)
             amount=temp+amount
             totalamount=amount+charge

@@ -11,8 +11,10 @@
       {% for product in products %}
         <div class="col">
           <div class="card shadow-sm">
-          <img src="{{ product.image.url }}" class="d-block w-100" alt="...">
-            <div class="card-body">
+          <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.image.url }}"
+           class="d-block w-100" alt="..."></a>
+
+                   <div class="card-body">
               <p class="card-text">{{product.name}}</p>
               <p class="card-text">{{product.description}}</p>
               <div class="d-flex justify-content-between align-items-center">

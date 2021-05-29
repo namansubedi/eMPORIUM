@@ -1,5 +1,6 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
+from django.urls import reverse
 
 # Create your models here.
 class profiles(models.Model):
@@ -45,6 +46,13 @@ class products(models.Model):
     detail = models.TextField(blank=True, null=True)
     
     
+    def get_url(self):
+        return reverse('productdetail', args=[self.slug])
+
+   
+
+    
+    
     
     def __str__(self):
         return str(self.name)
@@ -52,6 +60,7 @@ class products(models.Model):
 
     def slugify_function(self, content):
         return content.replace(' ', '-').lower()
+    
 
 class Feedback(models.Model):
     user_id = models.CharField(max_length=50)
