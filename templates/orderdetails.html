@@ -5,25 +5,48 @@
 
 <h1>Order Details</h1>
 <hr>
-<h3>Order No.: {{orders.order_id}}</h3>
-<h3>Order Status: {{orders.status}}</h3>
+<h6>Order No.: {{orders.order_id}}</h6>
+<h6>Order Status: <button class="btn btn-warning">{{orders.status}}</button></h6>
 <hr>
+<br>
 {% for prod in orderitem %}
 
-    <img src="{{prod.product.image.url}}" class="img-fluid img-thumbnail shadow-sm" height="100" width="150">
-    <h4>Product Name: {{prod.product.name}}</h4>
-    <h4>Quantity: {{prod.product_quantity}}</h4>
-    <h4>Ordered on: {{orders.order_date}}</h4>
-    <h4>Order Status: {{prod.status}}</h4>
-    <h4>Payment Method: {{prod.payment_detail.provider}}</h4>
-    <h4>Payment Status: {{prod.payment_detail.status}}</h4>
-    <h4>Payment Amount: {{prod.payment_detail.amount}}</h4>
-    {% if prod.payment_detail.status == 'Paid' %}
-    <h4>Payment Date: {{prod.payment_detail.payment_date}}</h4>
-    {% endif %}
-    <hr>
-{% endfor %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box-element "id = "order">
+      <div class="cart-row">
+        <div style="flex:2"><img src="{{prod.product.image.url}}"  class="img-fluid img-thumbnail shadow-sm" height="100" width="150"></div>
+        <div style="flex:2">
+          <h6>Product Name: {{prod.product.name}}</h6>
+          <h6>Ordered on: {{orders.order_date}}</h6>
+          <h6>Order Status: <button class="btn btn-warning">
+            {{prod.status}}</button></h6>
+        </div>
 
-<hr>
-<a href="{% url 'index' %}">Go to Home</a>
+        <div style="flex:2">
+          <h6>Payment Amount: {{prod.payment_detail.amount}}</h6>
+          {% if prod.payment_detail.status == 'Paid' %}
+          <h6>Payment Date: {{prod.payment_detail.payment_date}}</h6>
+          {% endif %}
+          <h6>Payment Status: {{prod.payment_detail.status}}</h6>
+          <h6>Payment Method: </h6><h5 style="color: green;"> {{prod.payment_detail.provider}}</h5>
+        </div>
+
+        <div style="flex:1">
+          <br>
+          <h6 style="text-align:center">Quantity:</h6> <h5  style=" text-align:center" style="color: red;">{{prod.product_quantity}}</h5>
+        </div>
+      </div>
+   
+    <hr>
+  </div>
+</div>
+</div>
+{% endfor %}
+ 
+
+<div class="btn-text-right kallu">
+<button class="btn btn-dark " href="{% url 'index' %}">&#x2190; Back to Home</a>
+</div>
+
 {% endblock body %}
