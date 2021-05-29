@@ -104,15 +104,6 @@ def myorder(request):
     
     return render(request , 'myorder.html',context)
 
-def confirmation(request):
-    print('in conf')
-    cod = request.GET['cod']
-    if cod == False:
-        messages.info(request,'Please Complete Payment Process!')
-        return redirect('checkout')
-    else:
-        return redirect('/')
-
 def checkout(request):
 
     user = request.user
@@ -169,9 +160,6 @@ def checkout(request):
 
             for prod in cart:
                 prod.delete()
-            
-            messages.info(request,'Order Has Been Placed! Please go to My Orders for further details!')
-
             return render(request, 'sucess.html')
 
     context = {

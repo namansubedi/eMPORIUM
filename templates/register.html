@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block title %}Registeration{% endblock title %}
 
 {% block body %}
@@ -85,7 +85,7 @@
     </div>
      <div class="form-row">
     <div class="col form-group">
-        {{form.as_p}}
+        {{form | crispy}}
     </div>
     <div class="form-row">
     <div class="col form-group">
