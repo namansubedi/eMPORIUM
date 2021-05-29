@@ -15,6 +15,8 @@ urlpatterns = [
     path('myproducts', views.myproducts, name="myproducts"),
     path('modify/<str:slug>', views.modify, name="modify"),
     path('password/', views.change_password, name='change_password'),
+    path('category/<str:cat>', views.category, name="category"),
+
 
     #path('reset_password', auth_views.PasswordResetView.as_view(template_name = "password_reset.html"),name= "reset_password"),
     #path('reset_password_sent', auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),

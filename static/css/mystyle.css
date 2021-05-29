@@ -2,7 +2,7 @@ body{
     color: #1a202c;
     
     text-align: left;
-    background-color: #eae7dc;    
+    background-color: #FFFFFF;    
 }
 .main-body {
     padding: 15px;
@@ -22,6 +22,12 @@ body{
     background-clip: border-box;
     border: 0 solid rgba(49, 46, 46, 0.125);
     border-radius: .25rem;
+}
+.categorybox {
+    position: relative;
+    left: 110px;
+    font-size: 25px;
+
 }
 
 .card-body {

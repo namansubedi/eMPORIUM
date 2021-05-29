@@ -19,21 +19,21 @@ class profiles(models.Model):
 
 
 category_CHOICES = (
-    ("el01", "General Electronics"),
-    ("el02", "Electronics-Smartphones"),
-    ("el03", "Electronics-PC's"),
-    ("el04", "Electronics-PC Components"),
-    ("el05", "Electronics-Laptops"),
-    ("fs01", "Fashion-Mens"),
-    ("fs02", "Fashion-Womens"),
-    ("fs03", "Fashion-Unisex"),
-    ("fs04", "Fashion-Shoes"),
+    ("General Electronics", "General Electronics"),
+    ("Electronics-Smartphones", "Electronics-Smartphones"),
+    ("Electronics-PC's", "Electronics-PC's"),
+    ("Electronics-PC Components", "Electronics-PC Components"),
+    ("Electronics-Laptops", "Electronics-Laptops"),
+    ("Fashion-Mens", "Fashion-Mens"),
+    ("Fashion-Womens", "Fashion-Womens"),
+    ("Fashion-Unisex", "Fashion-Unisex"),
+    ("Fashion-Shoes", "Fashion-Shoes"),
 
 )
 
 class products(models.Model):
     name = models.CharField(max_length=50)
-    category = models.CharField(choices=category_CHOICES ,max_length=5)
+    category = models.CharField(choices=category_CHOICES ,max_length=50)
     slug = AutoSlugField(populate_from='name')
     price = models.IntegerField()
     brand = models.CharField(max_length=50)

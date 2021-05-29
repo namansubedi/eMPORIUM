@@ -9,6 +9,13 @@ from django.contrib import messages
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 
+def category(request,cat):
+  
+    product=products.objects.filter(category=cat)
+    print(product)
+    return render(request,"category.html",{'products': product,'cat':cat})
+
+
 
 def change_password(request):
     if request.method == 'POST':
@@ -93,6 +100,8 @@ def search(request):
 # Create your views here.
 def index(request):
     user = request.user
+    category=["General Electronics","Electronics-Smartphones","Electronics-PC's","Electronics-PC Components","Electronics-Laptops","Fashion-Mens","Fashion-Womens",
+              "Fashion-Unisex","Fashion-Shoes"]
     showupload = False
     if user.is_authenticated:
         profile = profiles.objects.filter(user_name=user.username)
@@ -104,14 +113,14 @@ def index(request):
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = senditem.count()
-        return render(request, 'index.html', {"products":paged_products,"showupload":showupload,'product_count': product_count,})
+        return render(request, 'index.html', {"products":paged_products,"showupload":showupload,'product_count': product_count,"category":category})
     else:
         senditem = products.objects.all()
         paginator = Paginator(senditem,20)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = senditem.count()
-        return render(request, 'index.html', {"products": senditem,'product_count': product_count})
+        return render(request, 'index.html', {"products": senditem,'product_count': product_count,"category":category})
 
 
 def register(request):
