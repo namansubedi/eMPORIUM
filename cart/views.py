@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
@@ -40,6 +41,31 @@ def addtocart(request):
     c.save()
     
     return redirect('showcart')
+
+def addtocarts(request,slug):
+ if request.user.is_authenticated:   
+    user = request.user # this means the logged-in user
+    buyer_id=user.username
+    
+    product=products.objects.get(slug=slug)
+    seller=product.seller_id
+    print(product.stock)
+
+    is_item_in_cart=Cart.objects.filter(Q(buyer_id=buyer_id) & Q(product=product))
+    c=Cart(buyer_id=buyer_id, product=product)
+    if is_item_in_cart:
+        return redirect('showcart')
+    elif user.username==seller:
+        return redirect('productdetail',slug=product.slug)
+    elif product.stock==0:
+        return redirect('productdetail',slug=product.slug)
+    else:
+    
+        c.save()
+    
+        return redirect('showcart')
+ else:
+     return redirect('login')
 
 
 def showcart(request):
