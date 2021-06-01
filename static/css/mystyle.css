@@ -130,3 +130,24 @@ body{
     text-align: center;
     margin-left: 50%;
 }
+.isa_info {
+    margin: 10px 0px;
+    padding:12px;
+     
+}
+.isa_info {
+    color: #00529B;
+    background-color: #BDE5F8
+}
+.btn-default{
+    background-color: rgb(255, 115, 0);
+    color: white;
+    border: none;
+    height: 40px;
+}
+.btn-def{
+    background-color: rgba(11, 226, 241, 0.849);
+    color: white;
+    border: none;
+    height: 40px;
+}

@@ -44,7 +44,7 @@ class products(models.Model):
     stock = models.IntegerField(default=0)
     keywords = models.TextField()
     detail = models.TextField(blank=True, null=True)
-    
+    available_offer = models.TextField(default="No offer available.")
     
     def get_url(self):
         return reverse('productdetail', args=[self.slug])
