@@ -85,6 +85,17 @@ body{
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #ececec;
+    
+    
+
+}
+.cart-ro{
+	display: flex;
+    align-items: flex-stretch;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+    
 
 }
 .edit{
@@ -150,4 +161,20 @@ body{
     color: white;
     border: none;
     height: 40px;
+}
+.btn-pri{
+    background-color: rgba(0, 154, 243, 0.849);
+    color: white;
+    border: none;
+    height: 40px;
+    float: right;
+    border-width: 50px;
+    margin-right: 20px;
+}
+
+.ship{
+    background-color: crimson;
+}
+.ok{
+    margin-left: 40px;
 }
