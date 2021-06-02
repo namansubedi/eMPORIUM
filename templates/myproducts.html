@@ -6,34 +6,40 @@
 
     <h1>My Products</h1>
 
-    <div class="album py-5 bg-light">
+<div class="album py-5 bg-light">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       {% for product in products %}
+     
         <div class="col">
           <div class="card shadow-sm">
-          <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.image.url }}"
+           <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.image.url }}"
            class="d-block w-100" alt="..."></a>
             <div class="card-body">
               <p class="card-text">{{product.name}}</p>
               <p class="card-text">{{product.description}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="d-grid gap-2">
-                  <a href="{% url 'productdetail' product.slug %}" class="btn btn-secondary  btn-lg btn-block width-100" role="button">View Item</a>
-    
-                  <a href="{% url 'addtocarts' product.slug %}" class="btn btn-primary btn-lg btn-block width-100" role="button">Add to Cart</a>
-                 
-               
-                </div>
-                <small class="text-muted">Rs. {{product.price}}</small>
+
+
+            
+            <div class="d-grid gap-2">
+              <a href="{% url 'productdetail' product.slug %}" class="btn btn-secondary  btn-lg btn-block width-100" role="button">View Item</a>
+
+              <a href="{% url 'modify' product.slug %}" class="btn btn-primary btn-lg btn-block width-100" role="button">Modify</a>
+             
+           
+</div>
+       
+        <br>
+                <small class="text-muted"><strong>Rs. {{product.price}}</strong></small>
               </div>
             </div>
           </div>
-        </div>
       {% endfor %}
-    </div>
-    </div>
-    </div>
+
+
+
+
+
 
 
 {% endblock body %}

@@ -118,7 +118,12 @@ def checkout(request):
 
     if product_in_cart:
         no_of_items += 1
+        
         for product in product_in_cart:
+            if product.quantity==0:
+                return redirect('deletecart',slug=product.product.slug)
+                
+            
             temp=(product.quantity*product.product.price)
             amount=temp+amount
             totalamount=amount+charge

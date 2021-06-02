@@ -20,15 +20,18 @@
       <div>
        <h5>{{cart.product.name}}</h5>
        <p class="mb-2 text-muted small">{{cart.product.description}}</p>
+
+
        <div class="my-3">
         <label for="quantity">Quantity:</label>
-        <a class="minus-cart btn btn-light"><i class="fas fa-minus"></i></a>
+        <a class="minuscart btn btn-light" productid="{{cart.product.id}} "><i class="fas fa-minus"></i></a>
           <span id="quantity">{{cart.quantity}}</span>
-        <a class="plus-cart btn btn-light"><i class="fas fa-plus "></i></a>
+           <a class="pluscart btn btn-light" productid="{{cart.product.id}}"><i class="fas fa-plus"></i></a>
        </div> 
+
        <div class="d-flex justify-content-between">
-        <a href="#" class="btn btn btn-danger mr-3 remove-cart">Remove</a>
-        <p class="mb-0"><span><strong>Rs. {{cart.product.price}}</strong></span></p>
+        <a href="{% url 'deletecart' cart.product.slug %}" class="btn btn btn-danger mr-3 remove-cart">Remove</a>
+        <p class="mb-0"><span>Per-item Price : <b>Rs {{cart.product.price}}</b></span></p>
        </div>
       </div>
      </div>
@@ -58,21 +61,5 @@
    </div>
   </div>
   
-  
- </div>
-</div>
-<div class="container">
- <div class="row">
-  <div class="col-sm-8">
-   <div class="card">
-    <div class="card-body">
-      <h5 class="mb-4">We accept</h5>
-      <img src="{% static 'image/emporium_black.png' %}" alt="" class="img-fluid">
-    </div>
-  </div>
-  </div>
- </div>
-</div>
-
 
 {% endblock body %}

@@ -3,9 +3,99 @@ from django.shortcuts import render
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from django.db.models import Q
-
-from home.models import products
+from home .models import products
 from .models import *
+
+def pluscart(request):
+    if request.method=='GET':
+        user = request.user
+        buyer_id = user.username
+        product_id=request.GET['product_id']
+        product=products.objects.get(id=product_id)
+        cart=Cart.objects.get(Q(buyer_id=buyer_id) & Q(product=product))
+        if product.stock<=cart.quantity:
+            #print(cart.quantity)
+            cart.save()
+            totalamount=0
+            amount=0
+            charge=50
+            a=Cart.objects.filter(buyer_id=buyer_id)
+            
+            for product in a:
+                temp=(product.quantity*product.product.price)
+                amount=temp+amount
+                totalamount=amount+charge
+            data={
+                'quantity':cart.quantity,
+                'amount':amount,
+                'totalamount':totalamount,
+              }
+            
+                
+            
+            return JsonResponse(data)
+        
+    
+        else:
+            cart.quantity+=1
+            print(cart.quantity)
+            cart.save()
+            totalamount=0
+            amount=0
+            charge=50
+            a=Cart.objects.filter(buyer_id=buyer_id)
+            
+            for product in a:
+                temp=(product.quantity*product.product.price)
+                amount=temp+amount
+                totalamount=amount+charge
+            data={
+                'quantity':cart.quantity,
+                'amount':amount,
+                'totalamount':totalamount,
+            
+                
+            }
+            return JsonResponse(data)
+        
+    
+def minuscart(request):
+    if request.method=='GET':
+        user = request.user
+        buyer_id = user.username
+        product_id=request.GET['product_id']
+        product=products.objects.get(id=product_id)
+        cart=Cart.objects.get(product=product,buyer_id=buyer_id)
+        cart.quantity-=1
+        cart.save()
+        amount=0
+        charge=50
+        
+        
+        for item in Cart.objects.filter(buyer_id=buyer_id):
+            temp=(item.quantity*item.product.price)
+            amount=temp+amount
+            totalamount=amount+charge
+        data={
+            'quantity':cart.quantity,
+            'amount':amount,
+            'totalamount':totalamount
+        }
+        return JsonResponse(data)
+        
+    
+    
+def deletecart(request,slug):
+    user = request.user # this means the logged-in user
+    username=user.username
+    cart= Cart.objects.filter(buyer_id=username)
+    for item in cart:
+        if item.product.slug==slug:
+            item.delete()
+    return redirect('showcart')
+    
+
+            
 
 
 
@@ -82,9 +172,12 @@ def showcart(request):
     
     if cart:
         for product in cart:
+            if product.quantity==0:
+                return redirect('deletecart',slug=product.product.slug)
             temp=(product.quantity*product.product.price)
             amount=temp+amount
             totalamount=amount+charge
+            print(product.quantity)
             
         noofitem=len(Cart.objects.filter(buyer_id=buyer_id))
                 

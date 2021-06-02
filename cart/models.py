@@ -5,7 +5,7 @@ from home .models import *
 class Cart(models.Model):
     buyer_id = models.CharField(max_length=50)
     product=models.ForeignKey(products,on_delete=models.CASCADE,null=True)
-    quantity = models.IntegerField(default=1)
+    quantity = models.PositiveIntegerField(default=1)
     
     
     def __str__(self):
