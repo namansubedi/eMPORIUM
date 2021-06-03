@@ -55,10 +55,6 @@ def modify(request, slug):
     else:
         return redirect('/')
 
-def myproducts(request):
-    user = request.user
-    product = products.objects.filter(seller_id=user.username)
-    return render(request, 'myproducts.html', {'products': product})
 
 def editprofile(request):
 
@@ -87,8 +83,13 @@ def editprofile(request):
 
 def profile(request):
     user = request.user
+    product = products.objects.filter(seller_id=user.username)
     profile = profiles.objects.filter(user_name=user.username)
-    return render(request, 'profile.html', {'profile': profile })
+    context={
+        'products': product ,
+        'profile':profile
+    }
+    return render(request, 'profile.html', context)
 
 def search(request):
     q = request.GET['q']

@@ -11,105 +11,94 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="main-body">
-    
-          <div class="row gutters-sm">
-            <div class="col-md-4 mb-3">
-              <div class="card profcard">
-                <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
-                    <div class="mt-3">
-                      <h4>{{user.first_name}} {{user.last_name}}</h4>
-                      <p class="text-secondary mb-1">@{{user.username}}</p>
-                      {% for pro in profile %}
-                      <p class="text-muted font-size-sm">{{pro.area}}, {{pro.city}}, {{pro.region}}</p>
-                      {% endfor %}
-                      <form action="upload">
-                      <button  class="btn btn-outline-primary">Upload Products</button>
-                      </form>
-                      <form action="editprofile">
-                      <button class="btn btn-outline-primary my-3">Update Info</button>
-                      </form>
-                      <form action="myproducts">
-                      <button class="btn btn-outline-primary">My Products</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-8 ">
-            
-              <div class="card mb-3 profcard">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Full Name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{user.first_name}} {{user.last_name}}
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{user.email}}
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone Number</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                    {% for pro in profile%}
-                      {{pro.phone_number}}
-                    {% endfor %}
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Username</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{user.username}}
-                    </div>
-                  </div>
+  <br>
+  <br>
+  <div class ="row">
+    <div  class="col-lg-4">
+      <div class="text-center">
+        <div class="box-element">
+          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+  
+          <p class="text-secondary mb-1">@{{user.username}}</p>
+          <form action="editprofile">
+            <button class="btn btn-but"><i class="fas fa-user-edit"></i>    Edit info</button>
+            </form>
+                
+         </div>
 
-                  {% for pro in profile%}
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Shipping Area</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{pro.locale}}
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Address</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                    
-                      {{pro.area}}, {{pro.city}}, {{pro.region}}
-                    {% endfor %}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
 
-            
-          </div>
-        </div>
+
     </div>
+
+    <div  class="col-lg-8">
+      <div class="text-left">
+        <div class="box-element">
+          <br>
+
+          <h4>{{user.first_name.title}} {{user.last_name.title}}</h4>
+          {% for pro in profile %}
+          <i class="fas fa-map-marker-alt"></i>  {{pro.area.title}}, {{pro.city.title}}, {{pro.region}}
+          
+          {% endfor %}
+          <p><i class="fas fa-envelope"></i> {{user.email}}<i class="fas fa-mobile-alt" ></i>phone_number</p>
+          <p><form action="upload">
+            <button  class="btn btn-bu"> <i class="fas fa-plus-circle"></i>Add Products</button>     123        No of products
+            </form>
+          </p>
+      
+                     
+                      
+      
+         </div>
+
+      
+
+        </div>
+        <br>
+    <br>
+    
+    <hr>
+      </div>
+      
+    </div>
+    
+    <h2>My Products</h2>
+    
+    <hr>
+
+
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {% for product in products %}
+         
+            <div class="col">
+              <div class="card shadow-sm">
+               <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.image.url }}"
+               class="d-block w-100" alt="..."></a>
+                <div class="card-body">
+                  <p class="card-text">{{product.name}}</p>
+                  <p class="card-text">{{product.description}}</p>
+    
+    
+                
+                <div class="d-grid gap-2">
+                  <a href="{% url 'productdetail' product.slug %}" class="btn btn-secondary  btn-lg btn-block width-100" role="button">View Item</a>
+    
+                  <a href="{% url 'modify' product.slug %}" class="btn btn-primary btn-lg btn-block width-100" role="button">Modify</a>
+                 
+               
+    </div>
+           
+            <br>
+                    <small class="text-muted"><strong>Rs. {{product.price}}</strong></small>
+                  </div>
+                </div>
+              </div>
+          {% endfor %}
+    
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
