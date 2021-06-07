@@ -1,6 +1,7 @@
 from django.http import request
 from django.shortcuts import render, redirect
 from home.models import profiles, products
+from cart.models import Cart
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User, auth
@@ -44,6 +45,7 @@ def modify(request, slug):
         product.description = request.POST['description']
         product.stock = request.POST['stock']
         product.detail = request.POST['detail']
+        product.available_offer = request.POST['available_offer']
 
         product.save()
 
@@ -85,9 +87,13 @@ def profile(request):
     user = request.user
     product = products.objects.filter(seller_id=user.username)
     profile = profiles.objects.filter(user_name=user.username)
+    len = 0
+    for p in product:
+        len += 1
     context={
         'products': product ,
-        'profile':profile
+        'profile':profile,
+        'len': len
     }
     return render(request, 'profile.html', context)
 
@@ -101,11 +107,12 @@ def search(request):
 # Create your views here.
 def index(request):
     user = request.user
+    username= user.username
     category=["General Electronics","Electronics-Smartphones","Electronics-PC's","Electronics-PC Components","Electronics-Laptops","Fashion-Mens","Fashion-Womens",
               "Fashion-Unisex","Fashion-Shoes"]
     showupload = False
     if user.is_authenticated:
-        profile = profiles.objects.filter(user_name=user.username)
+        profile = profiles.objects.filter(user_name=username)
         #print(profile)
         for pro in profile:
             showupload = pro.is_seller 
@@ -114,7 +121,16 @@ def index(request):
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = senditem.count()
-        return render(request, 'index.html', {"products":paged_products,"showupload":showupload,'product_count': product_count,"category":category})
+        c = Cart.objects.filter(buyer_id = username).count()
+        print(c)
+        context = {
+            "products":paged_products,
+            "showupload":showupload,
+            'product_count': product_count,
+            "category":category,
+            "noofitem": c
+            }
+        return render(request, 'index.html', context)
     else:
         senditem = products.objects.all().order_by('id').reverse()
         paginator = Paginator(senditem,20)

@@ -21,7 +21,7 @@
   
           <p class="text-secondary mb-1">@{{user.username}}</p>
           <form action="editprofile">
-            <button class="btn btn-but"><i class="fas fa-user-edit"></i>    Edit info</button>
+            <button class="btn btn-but"><i class="fas fa-user-edit"></i> Edit info</button>
             </form>
                 
          </div>
@@ -39,11 +39,15 @@
           <h4>{{user.first_name.title}} {{user.last_name.title}}</h4>
           {% for pro in profile %}
           <i class="fas fa-map-marker-alt"></i>  {{pro.area.title}}, {{pro.city.title}}, {{pro.region}}
-          
+          <br>
+          <i class="fas fa-envelope"></i> {{user.email}}
+          <br>
+          <i class="fas fa-mobile-alt" ></i> {{pro.phone_number}}
           {% endfor %}
-          <p><i class="fas fa-envelope"></i> {{user.email}}<i class="fas fa-mobile-alt" ></i>phone_number</p>
+          <br>
+          You have uploaded <strong> {{len}} </strong> products currently active in the store.
           <p><form action="upload">
-            <button  class="btn btn-bu"> <i class="fas fa-plus-circle"></i>Add Products</button>     123        No of products
+            <button  class="btn btn-bu"> <i class="fas fa-plus-circle"></i>Add Products</button>
             </form>
           </p>
       
@@ -58,7 +62,7 @@
         <br>
     <br>
     
-    <hr>
+    
       </div>
       
     </div>

@@ -15,15 +15,15 @@ def fulfillmentdetails(request, id):
         if form1.is_valid():
             status1 = form1.cleaned_data['status']
             paystat = request.POST['pay']
-            #print(paystat)
             item1 = order_item.objects.filter(order_id=id) & order_item.objects.filter(product__seller_id = username)
             p = payment_details.objects.filter(seller_id=username)
-            for i in item1:                
+            for i in item1:   
+                prod = i.product          
                 i.status=status1
-                #i.payment_detail__status=paystat
-                #print(i.payment_detail__status)
+                if status1 == "Cancelled":          #to increase stock of product if the order is cancelled by vendor
+                    prod.stock += 1
+                    prod.save()
                 i.save()
-            print(p)
             for pa in p:
                 pa.status = paystat
                 pa.save()
@@ -61,11 +61,11 @@ def fulfillment(request):
     #print(id_list)
     id_finallist = [i for j, i in enumerate(id_list) if i not in id_list[:j]] 
 
-    for o in order1:
-        for ide in id_finallist:
-            if o.order_id == ide:
+    #for o in order1:
+        #for ide in id_finallist:
+            #if o.order_id == ide:
                 #order2 = order2 | o
-                print(order2)
+                #print(order2)
 
     send_orders = order_item.objects.filter(product__seller_id=username)
     context = {
