@@ -8,6 +8,9 @@ from django.contrib.auth.models import User, auth
 from .forms import productsform, profilesform
 from django.contrib import messages
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.mail import send_mail
+from django.utils.datastructures import MultiValueDictKeyError
+from .models import Feedback
 
 
 def category(request,cat):
@@ -107,30 +110,46 @@ def search(request):
 # Create your views here.
 def index(request):
     user = request.user
-    username= user.username
+    username = user.username
     category=["General Electronics","Electronics-Smartphones","Electronics-PC's","Electronics-PC Components","Electronics-Laptops","Fashion-Mens","Fashion-Womens",
               "Fashion-Unisex","Fashion-Shoes"]
     showupload = False
+    if request.method == 'POST':
+
+        emailll = request.POST['email']
+        message = request.POST['message']
+        print(emailll)
+        print(message)
+        if emailll == "" or message == "":
+            messages.info(request, "Cannot take empty feedback. Please fillup.")
+            return redirect('/')
+            
+        send_mail(# this requires 4 arguments compulsoraly: 
+            user,# subject like the 
+            message,# message,
+            emailll,# from email
+            
+            ['emporium5868@gmail.com'],# to email
+                    )
+        m = Feedback(email = emailll , text = message)
+        m.save()
+        messages.info(request, "Thanks for your feedback. We just received your email.")
+            
+        return redirect('/')
+
     if user.is_authenticated:
-        profile = profiles.objects.filter(user_name=username)
-        #print(profile)
+        profile = profiles.objects.filter(user_name=user.username)
+         #print(profile)
         for pro in profile:
             showupload = pro.is_seller 
-        senditem = products.objects.all().order_by('id').reverse()
-        paginator = Paginator(senditem,20)
-        page = request.GET.get('page')
-        paged_products = paginator.get_page(page)
-        product_count = senditem.count()
-        c = Cart.objects.filter(buyer_id = username).count()
-        print(c)
-        context = {
-            "products":paged_products,
-            "showupload":showupload,
-            'product_count': product_count,
-            "category":category,
-            "noofitem": c
-            }
-        return render(request, 'index.html', context)
+            senditem = products.objects.all().order_by('id').reverse()
+            paginator = Paginator(senditem,20)
+            page = request.GET.get('page')
+            paged_products = paginator.get_page(page)
+            product_count = senditem.count()
+            return render(request, 'index.html', {"products":paged_products,"showupload":showupload,'product_count': product_count,"category":category})
+        
+        
     else:
         senditem = products.objects.all().order_by('id').reverse()
         paginator = Paginator(senditem,20)
@@ -138,7 +157,7 @@ def index(request):
         paged_products = paginator.get_page(page)
         product_count = senditem.count()
         return render(request, 'index.html', {"products": senditem,'product_count': product_count,"category":category})
-
+    
 
 def register(request):
     if request.method == 'POST':

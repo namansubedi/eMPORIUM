@@ -1,6 +1,7 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from django.urls import reverse
+from django.utils import timezone
 
 # Create your models here.
 class profiles(models.Model):
@@ -63,10 +64,10 @@ class products(models.Model):
     
 
 class Feedback(models.Model):
-    user_id = models.CharField(max_length=50)
+    
     email = models.CharField(max_length=100)
     text = models.TextField()
+    created_time =models.DateTimeField(auto_now_add=True)
     
     
-    def __str__(self):
-        return str(self.user_id)
+   

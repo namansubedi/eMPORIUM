@@ -6,6 +6,17 @@ Home
 {% endblock title %}
 
 {% block body %}
+   
+{% for mes in messages %}
+
+<div class="alert alert-success alert-dismissible fade show mt-3 mx-5" role="alert">
+  <strong> {{ mes }} !!</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+{% endfor %}
+
+
 
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
@@ -79,5 +90,18 @@ Home
           </div>
       {% endfor %}
     </div>
+    <br>
+    <br>
+    <h1> Feedback Form: </h1>
+    <hr>
+    <form action ="/" method="post">
+      {% csrf_token %}
+      <br>
+      <input type="text" name = "email" placeholder=" Enter Your Email Here................."><br><br>
+      <textarea name="message" rows="5" cols="50" placeholder="We would love to hear about us from you."></textarea>
+      <br><br>
+      <button type="butoon" class="btn btn-success">Submit</button>
 
+
+  </form>
 {% endblock body %}
