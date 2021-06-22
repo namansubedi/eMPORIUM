@@ -109,6 +109,29 @@ body{
     background: #ffffff;
 
 }
+.fback{
+   background-color: #adcfec;
+   border-radius: 15px;
+
+}
+.fabackk{
+    margin-top: 020 px;
+    background-color: whitesmoke;
+
+    border-radius: 15px;
+ 
+ }
+.resetttt{
+    background-color: whitesmoke;
+}
+.faback{
+    color: black;
+    
+    margin-bottom: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 15px;
+}
 .profile{
     
     color: white;
@@ -187,7 +210,9 @@ body{
     float: left;
     border-width: 50px;
     margin-right: 20px;
+    border-radius: 5px;
 }
+
 .btn-but{
     background-color: rgba(0, 154, 243, 0.849);
     color: white;
@@ -196,4 +221,40 @@ body{
     float: center;
     border-width: 50px;
     margin-right: 20px;
+    border-radius: 10px;
+}
+.nam{
+    padding-left: 175px;
+}
+.okk{
+    height: 650px;
+    width: ;200px;
+}
+.imageee{
+    
+   
+    max-width:400px;
+    max-height:350px;
+    width: auto;
+    height: auto;
+  
+}
+.riight{
+    float: right;
+}
+.oshu{
+    text-align: center;
+    font-family: 'Italianno', cursive;
+    font-size: 300%;
+    font-weight: bold;
+}
+.ishwor{
+    height: 20 px;
+}
+.oskan{
+    text-align: center;
+    font-family: 'Italianno', cursive;
+    font-size: 400%;
+    color: black;
+    font-weight: bold;
 }

@@ -147,7 +147,8 @@ def index(request):
             page = request.GET.get('page')
             paged_products = paginator.get_page(page)
             product_count = senditem.count()
-            return render(request, 'index.html', {"products":paged_products,"showupload":showupload,'product_count': product_count,"category":category})
+            c = Cart.objects.filter(buyer_id = username).count()
+            return render(request, 'index.html', {"products":paged_products,"showupload":showupload,'product_count': product_count,"category":category,'noofitem':c})
         
         
     else:
@@ -156,6 +157,7 @@ def index(request):
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = senditem.count()
+
         return render(request, 'index.html', {"products": senditem,'product_count': product_count,"category":category})
     
 
