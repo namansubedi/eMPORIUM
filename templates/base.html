@@ -28,7 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="/">Explore</a>
+          <a class="nav-link" href="{% url 'index' %}">Explore</a>
         </li>
        
         {% if user.is_authenticated %}
@@ -73,7 +73,7 @@
 			    <input type="text" class="form-control " style="width:50%;" placeholder="Search" name="q">
 			    
 			    <div class="input-group-append">
-			      <button class="btn btn-primary" type="submit">
+			      <button class="btn btn-primary " type="submit">
 			        <i class="fa fa-search"></i>
 			      </button>
 			    </div>

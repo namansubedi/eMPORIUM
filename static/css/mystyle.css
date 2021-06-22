@@ -197,3 +197,11 @@ body{
     border-width: 50px;
     margin-right: 20px;
 }
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+
+
