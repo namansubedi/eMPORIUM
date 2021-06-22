@@ -20,7 +20,6 @@ def category(request,cat):
     return render(request,"category.html",{'products': product,'cat':cat})
 
 
-
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)

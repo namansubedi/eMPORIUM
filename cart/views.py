@@ -117,7 +117,7 @@ def delete(request,id):
     product=products.objects.get(id=id)
     if product.seller_id == username:
         product.delete()
-    return redirect('myproducts')
+    return redirect('profile')
     
  
 

@@ -228,7 +228,7 @@ body{
 }
 .okk{
     height: 650px;
-    width: ;200px;
+    width: 200px;
 }
 .imageee{
     
@@ -258,3 +258,12 @@ body{
     color: black;
     font-weight: bold;
 }
+
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+
+
