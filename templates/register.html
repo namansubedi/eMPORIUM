@@ -1,20 +1,25 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title %}Registeration{% endblock title %}
+{% block title %}Registration{% endblock title %}
 
 {% block body %}
 
     {% load static %}
 
-<body  class = "profile_back"></body>
-<section class="section-content padding-y">
 
-<div class="card mx-auto profile" style="max-width:520px; margin-top:40px;">
-      <article class="card-body">
+<div class=" card mx-auto  fback" style="max-width: 465px; margin-top:30px;">
 
 
+    <div class="card-body ">
+
+        <div  style="text-align: center; "> <img src="{% static 'images/emporium_black.png' %}" width="40" height="40"><b> eMPORIUM</b></div>
+    </div>
+    
+    <div class=" card mx-auto faback " style="height: 730px; width: 400px; margin-top: 20 px;" >
+        <div class="card-body ">
     <div class="form-row">
-      <h4 class="card-title mb-4">Register Here</h4>
+      <h5 class="card-title mb-4">Register Here</h5>
+      <hr>
     {% for message in messages %}
     <div class="alert alert-warning alert-dismissible fade show mt-3 mx-5" role="alert">
     <strong>Holy guacamole!</strong> {{ message }} !!
@@ -26,77 +31,118 @@
     {% csrf_token %}
 
     <div class="form-row">
-    <div class="col form-group">
+    <div class="row">
+    <div class="col">
 
-        <label for="exampleInputPassword1" class="form-label">First Name</label>
-        <input type="text" class="form-control" name="firstname">
+        
+        <input type="text" class="form-control" name="firstname" placeholder="First Name">
     </div>
+   
+    <div class="col ">
+        
+        <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+    </div>
+    </div>
+    <br>
+    <div class="row">
+    <div class="col">
+  
+        <input type="text" class="form-control" name="username" placeholder="Username">
+    </div>
+
+    </div>
+    <br>
+    <div class="form-row">
+    <div class="row">
+        <div class="col">
+    
+            
+            <input type="Integer" class="form-control" name="email" placeholder="E-mail">
+        </div>
+       
+       
+    </div>
+   <br>
+  
+   <div class="form-row">
+    <div class="row">
+    <div class="col">
+
+        
+        <input type="text" class="form-control" name="password" placeholder="Password">
+    </div>
+   
+    <div class="col ">
+        
+        <input type="text" class="form-control" name="password" placeholder="Re-Enter Password">
+    </div>
+    </div>
+    <br>
+    <div class="form-row">
+        <div class="row">
+            
+           
+            <div class="col ">
+                
+                <input type="text" class="form-control" name="phone_number" placeholder="Phone Number">
+            </div>
+            <div class="col">
+    
+                <input type="text" class="form-control" name="region" placeholder="Region">            
+                
+            </div>
+        </div>
+       <br>
+       
+    <div class="form-row">
+        <div class="row">
+        <div class="col">
+    
+            <input type="text" class="form-control" name="city" placeholder="City">
+            
+        </div>
+       
+        <div class="col ">
+            <input type="text" class="form-control" name="area" placeholder="Area">
+            
+        </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="row">
+
+           
+            <div class="col ">
+                
+                <input type="text" class="form-control" name="locale" placeholder="Locale">
+            </div>
+            </div>
+            <br>
+
     <div class="form-row">
     <div class="col form-group">
-        <label for="exampleInputPassword1" class="form-label">Last Name</label>
-        <input type="text" class="form-control" name="lastname">
+        
+        <input type="text" class="form-control" name="gmap" placeholder="Google Maps Link">
     </div>
-    <div class="form-row">
-    <div class="col form-group">
-        <label for="exampleInputPassword1" class="form-label">Username</label>
-        <input type="text" class="form-control" name="username">
-    </div>
-    <div class="form-row">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" name="email">
-    </div>
-    <div class="form-row">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" name="password1">
-    </div>
-    <div class="form-row">
-    <div class="col form-group">
-        <label for="exampleInputPassword1" class="form-label">Re-Enter Password</label>
-        <input type="password" class="form-control" name="password2" id="exampleInputPassword1">
-    </div>
-    <div class="form-row">
-    <div class="col form-group">
-        <label for="exampleInputPassword1" class="form-label">Phone Number</label>
-        <input type="Integer" class="form-control" name="phone_number">
-    </div>
-    <div class="form-row">
-    <div class="col form-group">
-        <label for="exampleInputPassword1" class="form-label">Region</label>
-        <input type="text" class="form-control" name="region">
-    </div>
-    <div class="form-row">
-        <label for="exampleInputPassword1" class="form-label">City</label>
-        <input type="text" class="form-control" name="city">
-    </div>
-    <div class="form-row">
-    <div class="col form-group">
-        <label for="exampleInputPassword1" class="form-label">Area</label>
-        <input type="text" class="form-control" name="area">
-    </div>
-    <div class="form-row">
-    <div class="col form-group">
-        <label for="exampleInputPassword1" class="form-label">Locale</label>
-        <input type="text" class="form-control" name="locale">
-    </div>
-    <div class="form-row">
-    <div class="col form-group">
-        <label for="exampleInputPassword1" class="form-label">Google Maps Link</label>
-        <input type="text" class="form-control" name="gmap">
-    </div>
+    <br>
+ 
      <div class="form-row">
     <div class="col form-group">
         {{form | crispy}}
-    </div>
+    </div><br>
     <div class="form-row">
-    <div class="col form-group">
-    <button type="submit" class="btn btn-primary text-center">Submit</button>
+    <div class="col form-group" style="text-align: center;">
+    <button type="submit" class="btn btn-success text-center">Submit</button>
     </div>
+    
+    <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}" style="text-decoration: none;">Log In</a></p>
     <br>
-    <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}">Log In</a></p>
 
     </form>
     </article>
 </section>
  </div> <!-- card .// -->
+
+
 {% endblock body%}
 

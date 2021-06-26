@@ -11,10 +11,16 @@ class profiles(models.Model):
     city = models.CharField(max_length=15)
     area = models.CharField(max_length=15)
     locale = models.CharField(max_length=50)
+<<<<<<< HEAD
     is_seller = models.BooleanField(default=False,verbose_name="Seller")
     gmap = models.CharField(max_length=100, blank=True, null=True)
     pan= models.BigIntegerField()
     
+=======
+    is_seller = models.BooleanField(default=False, verbose_name = 'Do you want to sell with eMPORIUM?')
+    gmap = models.CharField(max_length=100, blank=True, null=True)
+    pan = models.BigIntegerField()
+>>>>>>> ok
     
     
     def __str__(self):
