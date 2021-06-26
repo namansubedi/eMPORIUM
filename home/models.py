@@ -11,9 +11,9 @@ class profiles(models.Model):
     city = models.CharField(max_length=15)
     area = models.CharField(max_length=15)
     locale = models.CharField(max_length=50)
-    is_seller = models.BooleanField(default=False)
+    is_seller = models.BooleanField(default=False, verbose_name = 'Do you want to sell with eMPORIUM?')
     gmap = models.CharField(max_length=100, blank=True, null=True)
-    
+    pan = models.BigIntegerField()
     
     
     def __str__(self):

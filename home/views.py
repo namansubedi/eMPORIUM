@@ -78,6 +78,7 @@ def editprofile(request):
         profile.area = request.POST['area']
         profile.locale = request.POST['locale']
         profile.gmap = request.POST['gmap']
+        profile.pan = request.POST['pan']
 
         profile.save()
 

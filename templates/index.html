@@ -63,11 +63,11 @@ Home
       {% for product in products %}
  <div class="col-md-3">
 		<div class="card card-product-grid">
-      <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.image.url }}"width="400" height="250"
+      <a href="{{ product.get_url }}" class="img-wrap cropped1"> <img src="{{ product.image.url }}"
            class="d-block w-100" alt="..."></a>
      <div class="card-body">
 
-            <div  class='card-body left'>{{product.name}} </div>
+            <div  class='card-body left product_name'>{{product.name}} </div>
            <div class='card-body right'>Rs.{{product.price}} </div>
                 
                 </div>
