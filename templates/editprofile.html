@@ -21,6 +21,12 @@
         <label for="exampleInputPassword1" class="form-label">Phone Number</label>
         <input type="Integer" class="form-control" name="phone_number" value="{{pro.phone_number}}">
     </div>
+    {%if pro.is_seller %} 
+     <div class="mt-3 mx-5">
+        <label for="exampleInputPassword1" class="form-label">Pan Number</label>
+        <input type="Integer" class="form-control" name="pan" value="{{pro.pan}}">
+    </div>
+    {% endif %}
     <div class="mt-3 mx-5">
         <label for="exampleInputPassword1" class="form-label">Region</label>
         <input type="text" class="form-control" name="region" value="{{pro.region}}">

@@ -78,6 +78,7 @@ def editprofile(request):
         profile.area = request.POST['area']
         profile.locale = request.POST['locale']
         profile.gmap = request.POST['gmap']
+        profile.pan = request.POST['pan']
 
         profile.save()
 
@@ -182,6 +183,7 @@ def register(request):
         area = request.POST['area']
         locale = request.POST['locale']
         gmap = request.POST['gmap']
+        
 
         if password1 != password2:
             messages.info(request,'Password Mismatch!')
