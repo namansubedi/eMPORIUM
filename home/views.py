@@ -111,8 +111,8 @@ def search(request):
 def index(request):
     user = request.user
     username = user.username
-    category=["General Electronics","Electronics-Smartphones","Electronics-PC's","Electronics-PC Components","Electronics-Laptops","Fashion-Mens","Fashion-Womens",
-              "Fashion-Unisex","Fashion-Shoes"]
+    category=["Electronic Devices","Electronic Accessories","TV & Home Appliances","Health & Beauty","Babies & Toys","Groceries & Pets",
+    "Home & Lifestyle","Women's Fashion","Men's Fashion","Watches & Accessories","Sports & Outdoor","Automotive & Motorbike"]
     showupload = False
     if request.method == 'POST':
 
@@ -138,17 +138,19 @@ def index(request):
         return redirect('/')
 
     if user.is_authenticated:
-        profile = profiles.objects.filter(user_name=user.username)
-         #print(profile)
-        for pro in profile:
-            showupload = pro.is_seller 
-            senditem = products.objects.all().order_by('id').reverse()
-            paginator = Paginator(senditem,20)
-            page = request.GET.get('page')
-            paged_products = paginator.get_page(page)
-            product_count = senditem.count()
-            c = Cart.objects.filter(buyer_id = username).count()
-            return render(request, 'index.html', {"products":paged_products,"showupload":showupload,'product_count': product_count,"category":category,'noofitem':c})
+        try:
+            pro = profiles.objects.get(user_name=user.username)
+        except:
+            messages.info(request, "Invalid Profile! Please Use Another ID to login properly.")
+            return render(request, 'index.html')
+        showupload = pro.is_seller 
+        senditem = products.objects.all().order_by('id').reverse()
+        paginator = Paginator(senditem,20)
+        page = request.GET.get('page')
+        paged_products = paginator.get_page(page)
+        product_count = senditem.count()
+        c = Cart.objects.filter(buyer_id = username).count()
+        return render(request, 'index.html', {"products":paged_products,"showupload":showupload,'product_count': product_count,"category":category,'noofitem':c})
         
         
     else:
@@ -236,6 +238,9 @@ def upload(request):
             return redirect('/')
     else:
         profile = profiles.objects.filter(user_name=user.username)
+        if profile[0].pan == 0:
+            messages.info(request, "Please go to edit info and add PAN before uploading products")
+            return redirect('/')
         for pro in profile:
             showupload = pro.is_seller
         if showupload:

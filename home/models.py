@@ -21,16 +21,18 @@ class profiles(models.Model):
 
 
 category_CHOICES = (
-    ("General Electronics", "General Electronics"),
-    ("Electronics-Smartphones", "Electronics-Smartphones"),
-    ("Electronics-PC's", "Electronics-PC's"),
-    ("Electronics-PC Components", "Electronics-PC Components"),
-    ("Electronics-Laptops", "Electronics-Laptops"),
-    ("Fashion-Mens", "Fashion-Mens"),
-    ("Fashion-Womens", "Fashion-Womens"),
-    ("Fashion-Unisex", "Fashion-Unisex"),
-    ("Fashion-Shoes", "Fashion-Shoes"),
-
+    ("Electronic Devices", "Electronic Devices"),
+    ("Electronic Accessories", "Electronic Accessories"),
+    ("TV & Home Appliances", "TV & Home Appliances"),
+    ("Health & Beauty", "Health & Beauty"),
+    ("Babies & Toys", "Babies & Toys"),
+    ("Groceries & Pets", "Groceries & Pets"),
+    ("Home & Lifestyle", "Home & Lifestyle"),
+    ("Women's Fashion", "Women's Fashion"),
+    ("Men's Fashion", "Men's Fashion"),
+    ("Watches & Accessories", "Watches & Accessories"),
+    ("Sports & Outdoor", "Sports & Outdoor"),
+    ("Automotive & Motorbike", "Automotive & Motorbike"),
 )
 
 class products(models.Model):

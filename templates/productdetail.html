@@ -20,21 +20,24 @@
   <div class="col-sm-5 offset-sm-1 pro">
    <h2>{{product.name}}</h2>
    <hr>
-   <p>Product Description:{{product.description}}</p> 
-   <p> Brand:<strong>{{product.brand}}</strong></p>
+   <p>{{product.description}}</p> 
+   {% if product.detail %}
+   <h5>Details</h5>
+   <p>{{product.detail}}</p>
+   {% endif %}
+   <p> Brand: <strong>{{product.brand}}</strong></p>
    
-   <h4>Price: Rs. {{product.price}}</h4>
+   <h4><i class="fas fa-tags"></i> Rs. {{product.price}}</h4>
    <hr>
     {% if request.user.is_authenticated %} 
-     {% if stock_quantity == 0 %} 
-    <a href="{% url 'showcart' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Out of Stock</a>
+     {% if user.username == seller %} 
+    <h5>Product stock: {{product.stock}}</h5>
+      <a href="{% url 'delete' product.id %}" class="btn btn-danger shadow px-5 py-2 ms-4">Delete</a>
+      <a href="{% url 'modify' product.slug %}" class="btn btn-secondary shadow px-5 py-2 ms-4">Modify</a>
     <hr>
 
-    {% elif user.username == seller%} 
-    
-   
-     <h5>Product stock: {{product.stock}}</h5>
-      <a href="{% url 'delete' product.id %}" class="btn btn-danger shadow px-5 py-2 ms-4">Delete</a>
+    {% elif stock_quantity == 0 %} 
+    <a href="#" class="btn btn-danger shadow px-5 py-2 ms-4">Out of Stock</a>
     <hr>
    {% elif is_item_in_cart %}
    
@@ -53,10 +56,16 @@
 
 
    {% if not request.user.is_authenticated %}
-   <form action="{% url 'login' %}" class="d-inline">
-        <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
-        <button type="submit" class="btn btn-dark shadow px-5 py-2">Add to Cart</button>
-    </form>
+        {% if stock_quantity == 0 %} 
+            <a href="#" class="btn btn-danger shadow px-5 py-2 ms-4">Out of Stock</a>
+            <hr>
+            {% else %}
+    <form action="{% url 'login' %}" class="d-inline">
+            <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
+            <button type="submit" class="btn btn-dark shadow px-5 py-2">Add to Cart</button>
+            <a href="{% url 'login' %}" class="btn btn-def shadow px-5 py-2 ms-4">Buy Now</a>
+        </form>
+        {% endif %}
    {% endif %}
   
    <h5 class="mt-5">Available Offers</h5>

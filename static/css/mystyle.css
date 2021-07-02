@@ -207,7 +207,7 @@ body{
     border-radius: 5px;
 }
 .cropped1{
-    width: 265px; /* width of container */
+    width: 312px; /* width of container */
     height: 250px; /* height of container */
    
     object-fit: cover;

@@ -9,7 +9,7 @@ Home
 {% for mes in messages %}
 
 <div class="alert alert-success alert-dismissible fade show mt-3 mx-5" role="alert">
-  <strong> {{ mes }} !!</strong>
+  <strong> {{ mes }} </strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 
@@ -72,7 +72,7 @@ Home
                 
                 </div>
               <div class="d-grid gap-2">
-              <a href="{% url 'productdetail' product.slug %}" class="btn btn-success  btn-lg btn-block width-100 " role="button">View Item</a>
+              
 
               <a href="{% url 'addtocarts' product.slug %}" class="btn btn-primary btn-lg btn-block width-100" role="button">Add to Cart</a>
              
