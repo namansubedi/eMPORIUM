@@ -4,145 +4,146 @@
 
 {% block body %}
 
-    {% load static %}
+{% load static %}
 
 
 <div class=" card mx-auto  fback" style="max-width: 465px; margin-top:30px;">
 
 
-    <div class="card-body ">
+	<div class="card-body ">
 
-        <div  style="text-align: center; "> <img src="{% static 'images/emporium_black.png' %}" width="40" height="40"><b> eMPORIUM</b></div>
-    </div>
-    
-    <div class=" card mx-auto faback " style="height: 730px; width: 400px; margin-top: 20 px;" >
-        <div class="card-body ">
-    <div class="form-row">
-      <h5 class="card-title mb-4">Register Here</h5>
-      <hr>
-    {% for message in messages %}
-    <div class="alert alert-warning alert-dismissible fade show mt-3 mx-5" role="alert">
-    <strong>Holy guacamole!</strong> {{ message }} !!
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    {% endfor %}
+		<div style="text-align: center; "> <img src="{% static 'images/emporium_black.png' %}" width="40" height="40"><b>
+				eMPORIUM</b></div>
+	</div>
 
-    <form action="register" method="post">
-    {% csrf_token %}
+	<div class=" card mx-auto faback " style="height: 730px; width: 400px; margin-top: 20 px;">
+		<div class="card-body ">
+			<div class="form-row">
+				<h5 class="card-title mb-4">Register Here</h5>
+				<hr>
+				{% for message in messages %}
+				<div class="alert alert-warning alert-dismissible fade show mt-3 mx-5" role="alert">
+					<strong>Holy guacamole!</strong> {{ message }} !!
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+				{% endfor %}
 
-    <div class="form-row">
-    <div class="row">
-    <div class="col">
+				<form action="register" method="post">
+					{% csrf_token %}
 
-        
-        <input type="text" class="form-control" name="firstname" placeholder="First Name">
-    </div>
-   
-    <div class="col ">
-        
-        <input type="text" class="form-control" name="lastname" placeholder="Last Name">
-    </div>
-    </div>
-    <br>
-    <div class="row">
-    <div class="col">
-  
-        <input type="text" class="form-control" name="username" placeholder="Username">
-    </div>
-
-    </div>
-    <br>
-    <div class="form-row">
-    <div class="row">
-        <div class="col">
-    
-            
-            <input type="Integer" class="form-control" name="email" placeholder="E-mail">
-        </div>
-       
-       
-    </div>
-   <br>
-  
-   <div class="form-row">
-    <div class="row">
-    <div class="col">
-
-        
-        <input type="text" class="form-control" name="password" placeholder="Password">
-    </div>
-   
-    <div class="col ">
-        
-        <input type="text" class="form-control" name="password" placeholder="Re-Enter Password">
-    </div>
-    </div>
-    <br>
-    <div class="form-row">
-        <div class="row">
-            
-           
-            <div class="col ">
-                
-                <input type="text" class="form-control" name="phone_number" placeholder="Phone Number">
-            </div>
-            <div class="col">
-    
-                <input type="text" class="form-control" name="region" placeholder="Region">            
-                
-            </div>
-        </div>
-       <br>
-       
-    <div class="form-row">
-        <div class="row">
-        <div class="col">
-    
-            <input type="text" class="form-control" name="city" placeholder="City">
-            
-        </div>
-       
-        <div class="col ">
-            <input type="text" class="form-control" name="area" placeholder="Area">
-            
-        </div>
-        </div>
-        <br>
-        <div class="form-row">
-            <div class="row">
-
-           
-            <div class="col ">
-                
-                <input type="text" class="form-control" name="locale" placeholder="Locale">
-            </div>
-            </div>
-            <br>
-
-    <div class="form-row">
-    <div class="col form-group">
-        
-        <input type="text" class="form-control" name="gmap" placeholder="Google Maps Link">
-    </div>
-    <br>
- 
-     <div class="form-row">
-    <div class="col form-group">
-        {{form | crispy}}
-    </div><br>
-    <div class="form-row">
-    <div class="col form-group" style="text-align: center;">
-    <button type="submit" class="btn btn-success text-center">Submit</button>
-    </div>
-    
-    <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}" style="text-decoration: none;">Log In</a></p>
-    <br>
-
-    </form>
-    </article>
-</section>
- </div> <!-- card .// -->
+					<div class="form-row">
+						<div class="row">
+							<div class="col">
 
 
-{% endblock body%}
+								<input type="text" class="form-control" name="firstname" placeholder="First Name">
+							</div>
 
+							<div class="col ">
+
+								<input type="text" class="form-control" name="lastname" placeholder="Last Name">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+
+								<input type="text" class="form-control" name="username" placeholder="Username">
+							</div>
+
+						</div>
+						<br>
+						<div class="form-row">
+							<div class="row">
+								<div class="col">
+
+
+									<input type="Integer" class="form-control" name="email" placeholder="E-mail">
+								</div>
+
+
+							</div>
+							<br>
+
+							<div class="form-row">
+								<div class="row">
+									<div class="col">
+
+
+										<input type="text" class="form-control" name="password1" placeholder="Password">
+									</div>
+
+									<div class="col ">
+
+										<input type="text" class="form-control" name="password2" placeholder="Re-Enter Password">
+									</div>
+								</div>
+								<br>
+								<div class="form-row">
+									<div class="row">
+
+
+										<div class="col ">
+
+											<input type="text" class="form-control" name="phone_number" placeholder="Phone Number">
+										</div>
+										<div class="col">
+
+											<input type="text" class="form-control" name="region" placeholder="Region">
+
+										</div>
+									</div>
+									<br>
+
+									<div class="form-row">
+										<div class="row">
+											<div class="col">
+
+												<input type="text" class="form-control" name="city" placeholder="City">
+
+											</div>
+
+											<div class="col ">
+												<input type="text" class="form-control" name="area" placeholder="Area">
+
+											</div>
+										</div>
+										<br>
+										<div class="form-row">
+											<div class="row">
+
+
+												<div class="col ">
+
+													<input type="text" class="form-control" name="locale" placeholder="Locale">
+												</div>
+											</div>
+											<br>
+
+											<div class="form-row">
+												<div class="col form-group">
+
+													<input type="text" class="form-control" name="gmap" placeholder="Google Maps Link">
+												</div>
+												<br>
+
+												<div class="form-row">
+													<div class="col form-group">
+														{{form | crispy}}
+													</div><br>
+													<div class="form-row">
+														<div class="col form-group" style="text-align: center;">
+															<button type="submit" class="btn btn-success text-center">Submit</button>
+														</div>
+
+														<p class="text-center mt-4">Have an account? <a href="{% url 'login' %}"
+																style="text-decoration: none;">Log In</a></p>
+														<br>
+
+				</form>
+				</article>
+				</section>
+			</div> <!-- card .// -->
+
+
+			{% endblock body%}
