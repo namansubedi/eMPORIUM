@@ -5,3 +5,4 @@ from.models import *
 admin.site.register(profiles)
 admin.site.register(products)
 admin.site.register(Feedback)
+admin.site.register(faq)

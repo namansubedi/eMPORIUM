@@ -1,6 +1,6 @@
 from django.http import request
 from django.shortcuts import render, redirect
-from home.models import profiles, products
+from home.models import profiles, products, faq
 from cart.models import Cart
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
@@ -12,6 +12,12 @@ from django.core.mail import send_mail
 from django.utils.datastructures import MultiValueDictKeyError
 from .models import Feedback
 
+def faqs(request):
+    list = faq.objects.all()
+    context={
+        'list': list
+    }
+    return render(request, "faqs.html", context)
 
 def category(request,cat):
   
@@ -32,9 +38,7 @@ def change_password(request):
             messages.error(request, 'Please correct the error below.')
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'change_password.html', {
-        'form': form
-    })
+    return render(request, 'change_password.html', {'form': form})
 
 
 def modify(request, slug):

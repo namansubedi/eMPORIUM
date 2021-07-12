@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}FAQ's{% endblock title %}
+{% block body %}
+
+<h1 style="text-align: center; color:rgb(20, 20, 49)">Frequently Asked Questions</h1>
+
+<div class="container">
+  <div class="accordion" id="accordionExample">
+    {% for set in list %}
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{set.id}}" aria-expanded="false" aria-controls="collapseOne">
+            {{set.question}}
+          </button>
+        </h2>
+        <div id="collapseOne{{set.id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            {{set.answer}}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <br>
+  <h4>
+  <a href="/" style="text-decoration: none;">Back to Home</a>
+  </h4>
+</div>
+
+{% endblock body %}

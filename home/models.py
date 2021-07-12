@@ -3,6 +3,10 @@ from django_extensions.db.fields import AutoSlugField
 from django.urls import reverse
 from django.utils import timezone
 
+class faq(models.Model):
+    question = models.TextField()
+    answer = models.TextField()
+
 # Create your models here.
 class profiles(models.Model):
     user_name = models.CharField(max_length=50)

@@ -86,6 +86,9 @@ Home
       {% endfor %}
     </div>
      <br>
+     <div class="forfaq">
+  <h3><a href="{% url 'faqs' %}" style="text-decoration: none;">FAQ </a></h3>
+  </div>
     <br>
     <h1> Feedback Form: </h1>
     <hr>
@@ -96,8 +99,6 @@ Home
       <textarea name="message" rows="5" cols="50" placeholder="We would love to hear about us from you."></textarea>
       <br><br>
       <button type="butoon" class="btn btn-success">Submit</button>
-
-
   </form>
    </section>
 {% endblock body %}
