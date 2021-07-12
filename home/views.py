@@ -12,6 +12,9 @@ from django.core.mail import send_mail
 from django.utils.datastructures import MultiValueDictKeyError
 from .models import Feedback
 
+def error_404_view(request, exception):
+    return render(request,'404.html')
+
 def faqs(request):
     list = faq.objects.all()
     context={
