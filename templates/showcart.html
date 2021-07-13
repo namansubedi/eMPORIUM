@@ -2,14 +2,19 @@
 {% load static %}
 {% block title %}Cart{% endblock title %}
 {% block body %}
+ <div class="ourheading">
+Shopping Cart
+
+</div>
+  
 <div class="container my-5">
  <div class="row">
-  <h1 class="text-center mb-5">Shopping Cart</h1>
+
   <div class="col-sm-8">
   <div class="card">
    <div class="card-body">
 
-    <h3>Cart</h3>
+    <h3>Items</h3>
 
     {% for cart in carts %}
     <br>
