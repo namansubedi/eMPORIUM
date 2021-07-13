@@ -17,7 +17,7 @@
     <div  class="col-lg-4">
       <div class="text-center">
         <div class="box-element">
-          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+          <img src="{% static 'images/pfp.png' %}" alt="Admin" class="rounded-circle" width="150">
   
           <p class="text-secondary mb-1">@{{user.username}}</p>
           <form action="editprofile">
@@ -48,8 +48,34 @@
           <br>
           You have uploaded <strong> {{len}} </strong> products currently active in the store.
           <p><form action="upload">
-            <button  class="btn btn-bu"> <i class="fas fa-plus-circle"></i>Add Products</button>
+            <button  class="btn btn-bu"> <i class="fas fa-plus-circle"></i> Add Products</button>
             </form>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+              Delete Account
+            </button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete Account?</h5>
+        
+      </div>
+      <div class="modal-body">
+        Are you sure you would like to delete your account? This action is irreversable and all your info will be deleted.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="{% url 'deleteacc' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger" >Confirm Deletion</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
           </p>
       
                      

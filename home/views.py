@@ -1,6 +1,7 @@
 from django.http import request
 from django.shortcuts import render, redirect
 from home.models import profiles, products, faq
+from orderapp.models import order_item, order, payment_details
 from cart.models import Cart
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
@@ -11,6 +12,29 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.mail import send_mail
 from django.utils.datastructures import MultiValueDictKeyError
 from .models import Feedback
+
+def deleteacc(request):
+    if request.method == 'POST':
+        username = request.user.username
+        orderlist = []
+        or1 = order.objects.filter(buyer_id=username)
+        for o in or1:
+            orderlist.append(o.order_id)
+        for num in orderlist:
+            try:
+                payment_details.objects.filter(order_id=num).delete()
+            except:
+                print("Not found")
+        order.objects.filter(buyer_id=username).delete()
+        order_item.objects.filter(buyer=request.user).delete()
+        Cart.objects.filter(buyer_id=username).delete()
+        products.objects.filter(seller_id=username).delete()
+        User.objects.filter(username = username).delete()
+        profiles.objects.filter(user_name=username).delete()
+        messages.info(request, "The user is deleted")
+        return redirect('/')
+    else:
+        return redirect('/')
 
 def error_404_view(request, exception):
     return render(request,'404.html')
@@ -192,7 +216,7 @@ def register(request):
         area = request.POST['area']
         locale = request.POST['locale']
         gmap = request.POST['gmap']
-        
+        pan = 0
 
         if password1 != password2:
             messages.info(request,'Password Mismatch!')
@@ -207,7 +231,7 @@ def register(request):
             user = User.objects.create_user(username=username, first_name=firstname, last_name=lastname, email=email, password=password1)
             user.save()
 
-            profile = profiles.objects.create(user_name=username, phone_number=phone_number, region=region, city=city, area=area, locale=locale, is_seller=is_seller, gmap=gmap)
+            profile = profiles.objects.create(user_name=username,pan=pan, phone_number=phone_number, region=region, city=city, area=area, locale=locale, is_seller=is_seller, gmap=gmap)
             profile.save()
 
             return redirect('/')
