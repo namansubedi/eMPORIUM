@@ -116,7 +116,7 @@ body{
 }
 .fabackk{
     margin-top: 020 px;
-    background-color: whitesmoke;
+    background-color: white;
 
     border-radius: 15px;
  
@@ -131,6 +131,7 @@ body{
     margin-left: 10px;
     margin-right: 10px;
     border-radius: 15px;
+    background-color: white;
 }
 .profile{
     
@@ -290,4 +291,22 @@ body{
     font-weight:500;
    
 
+}
+.remove-box{
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: white;  
+}
+
+.no-outline:focus {
+    outline: none;
+}
+.errspan {
+    float: right;
+    margin-right: 6px;
+    margin-top: -20px;
+    position: relative;
+    z-index: 2;
 }
