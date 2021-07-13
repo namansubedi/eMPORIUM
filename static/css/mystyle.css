@@ -282,3 +282,12 @@ body{
 .forfaq{
     text-align: left;
 }
+
+.ourheading{
+    text-align: center;
+    font-size: 250%;
+    color: black;
+    font-weight:500;
+   
+
+}

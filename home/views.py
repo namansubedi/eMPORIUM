@@ -278,7 +278,9 @@ def upload(request):
             form = productsform()
             return render(request, "upload.html", {"form": form})
         else:
-            return render(request, "noupload.html")
+            messages.info(request,'You are not registered as Seller')
+            
+            return redirect('/')
 
 def login(request):
     if request.method == 'POST':
