@@ -16,17 +16,6 @@ from .models import Feedback
 def deleteacc(request):
     if request.method == 'POST':
         username = request.user.username
-        orderlist = []
-        or1 = order.objects.filter(buyer_id=username)
-        for o in or1:
-            orderlist.append(o.order_id)
-        for num in orderlist:
-            try:
-                payment_details.objects.filter(order_id=num).delete()
-            except:
-                print("Not found")
-        order.objects.filter(buyer_id=username).delete()
-        order_item.objects.filter(buyer=request.user).delete()
         Cart.objects.filter(buyer_id=username).delete()
         products.objects.filter(seller_id=username).delete()
         User.objects.filter(username = username).delete()

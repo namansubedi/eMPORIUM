@@ -10,7 +10,6 @@ Order Details
 </div>
 
 <h6>Order No.: {{orders.order_id}}</h6>
-<h6>Order Status: <button class="btn btn-warning">{{orders.status}}</button></h6>
 <hr>
 <br>
 {% for prod in orderitem %}
@@ -50,7 +49,7 @@ Order Details
  
 
 <div class="btn-text-right kallu">
-<button class="btn btn-dark " href="{% url 'index' %}">&#x2190; Back to Home</a>
+<a class="btn btn-dark " href="{% url 'index' %}">Back to Home</a>
 </div>
 
 {% endblock body %}

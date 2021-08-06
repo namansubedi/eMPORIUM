@@ -46,10 +46,10 @@
        {% else %}
     <form action="{% url 'addtocart' %}" class="d-inline">
         <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
-        <button type="submit" class="btn btn-default shadow px-5 py-2 ms-4 rounded-pill">Add to Cart</button>
+        <button type="submit" class="btn btn-default shadow px-5 py-2 ms-4 ">Add to Cart</button>
         
     </form>
-     <a href="{% url 'buynow' product.slug %}" class="btn btn-def shadow px-5 py-2 ms-4 rounded-pill">Buy Now</a>
+     <a href="{% url 'buynow' product.slug %}" class="btn btn-def shadow px-5 py-2 ms-4 ">Buy Now</a>
     <hr>
 {% endif %}
    {% endif %}

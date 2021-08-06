@@ -28,7 +28,7 @@
           <div style="flex:4">
               <h6><strong> {{cart.product.name}}</strong></h6>
               <h6>{{cart.product.description}}</h6>
-              <h6>price : {{cart.product.price}}</h6>
+              <h6>Price : Rs. {{cart.product.price}}</h6>
 
         
           </div>
@@ -48,13 +48,13 @@
            
             <a  class="btn btn-dark" href="{% url 'showcart' %}">&#x2190; Back to Cart</a>
             <hr>
-            <h6>Product total: {{totalamount}}</h6>
-            <h6>Service charge: 20</h6>
-            <h6>Shipping fee: 50</h6>
+            <h6>Product total: Rs. {{totalamount}}</h6>
+            <h6>Service charge: Rs. 20</h6>
+            <h6>Shipping fee: Rs. 50</h6>
             <br>
             
             <hr>
-            <h6><strong>Total: </strong><strong text-align = "right">{{grandtotal}}</h6>
+            <h6><strong>Total: Rs. </strong><strong text-align = "right">{{grandtotal}}</h6>
 
         </div>
         <div class="box-element" id = "order">
@@ -86,10 +86,7 @@
             <div style="flex:2">
                 <h5>Payment Options:</h5>
                 <h6>
-                  esewa(Not working LOL)
-                </h6>
-                
-                <h6>Paypal</h6>
+                  Cash On Delivery
                 
             </div>
            
