@@ -165,7 +165,7 @@ def index(request):
             return render(request, 'index.html')
         showupload = pro.is_seller 
         senditem = products.objects.all().order_by('id').reverse()
-        paginator = Paginator(senditem,20)
+        paginator = Paginator(senditem,12)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = senditem.count()
@@ -175,12 +175,12 @@ def index(request):
         
     else:
         senditem = products.objects.all().order_by('id').reverse()
-        paginator = Paginator(senditem,20)
+        paginator = Paginator(senditem,12)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = senditem.count()
 
-        return render(request, 'index.html', {"products": senditem,'product_count': product_count,"category":category})
+        return render(request, 'index.html', {"products": paged_products,'product_count': product_count,"category":category})
     
 
 def register(request):
